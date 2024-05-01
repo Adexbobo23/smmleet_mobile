@@ -15,6 +15,7 @@ const SignUp = () => {
 
   const handleSignUp = () => {
     console.log('Sign-up button clicked');
+    navigation.navigate('SignupSuccess');
   };
 
   const handleGotoLogin = () => {

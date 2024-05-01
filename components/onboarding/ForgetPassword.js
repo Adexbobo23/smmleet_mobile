@@ -9,7 +9,7 @@ const ForgetPassword = () => {
 
   const handleResetPassword = () => {
     console.log('Reset password button clicked');
-    navigation.navigate('PasswordReset');
+    navigation.navigate('PasswordResetOtp');
   };
 
   const handleGotoLogin = () => {

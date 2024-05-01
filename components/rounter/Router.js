@@ -7,6 +7,9 @@ import SignUp from '../onboarding/SignUp';
 import Login from '../onboarding/Login';
 import ForgetPassword from '../onboarding/ForgetPassword';
 import PasswordReset from '../onboarding/PasswordReset';
+import ResetOTP from '../onboarding/PasswordResetOtp';
+import PasswordResetSuccessful from '../onboarding/PasswordResetSuccessful';
+import SignupSuccessful from '../onboarding/SignupSuccess';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +22,9 @@ const Router = () => {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
         <Stack.Screen name="PasswordReset" component={PasswordReset} />
+        <Stack.Screen name="PasswordResetOtp" component={ResetOTP} />
+        <Stack.Screen name="PasswordResetSuccess" component={PasswordResetSuccessful} />
+        <Stack.Screen name="SignupSuccess" component={SignupSuccessful} />
       </Stack.Navigator>
     </NavigationContainer>
   );

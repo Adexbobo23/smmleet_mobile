@@ -11,6 +11,7 @@ const PasswordReset = () => {
 
   const handleResetPassword = () => {
     console.log('Reset password button clicked');
+    navigation.navigate('PasswordResetSuccess');
   };
 
   const handleGotoLogin = () => {
