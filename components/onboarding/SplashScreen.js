@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Image, StyleSheet, ScrollView, Text, TouchableOpacity, Dimensions } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native'; 
 const { width: screenWidth } = Dimensions.get('window');
 
 const SplashScreen = () => {
@@ -17,6 +17,11 @@ const SplashScreen = () => {
   };
 
   const scrollViewRef = React.createRef();
+  const navigation = useNavigation(); 
+
+  const handleGetStarted = () => {
+    navigation.navigate('SignUp'); 
+  };
 
   return (
     <View style={styles.container}>
@@ -47,7 +52,7 @@ const SplashScreen = () => {
           />
         ))}
       </View>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
         <Text style={styles.buttonText}>Get Started</Text>
       </TouchableOpacity>
     </View>
@@ -62,7 +67,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
   },
@@ -107,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '80%',
     height: 55,
-    marginBottom: 100,
+    marginBottom: 80,
     marginTop: 30,
   },
   buttonText: {
