@@ -17,6 +17,10 @@ const Login = () => {
     navigation.navigate('SignUp');
   };
 
+  const handleGotoForgetPassword = () => {
+    navigation.navigate('ForgetPassword');
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
     <View style={styles.container}>
@@ -42,7 +46,7 @@ const Login = () => {
         </TouchableOpacity>
       </View>
       <Text style={styles.signInText}>
-        Forget your password? <Text style={styles.forgetInLink} onPress={handleGotoSignUp}>Reset</Text>
+        Forget your password? <Text style={styles.forgetInLink} onPress={handleGotoForgetPassword}>Reset</Text>
       </Text>
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>

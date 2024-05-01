@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from '../onboarding/SplashScreen';
 import SignUp from '../onboarding/SignUp';
 import Login from '../onboarding/Login';
+import ForgetPassword from '../onboarding/ForgetPassword';
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ const Router = () => {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
       </Stack.Navigator>
     </NavigationContainer>
   );
