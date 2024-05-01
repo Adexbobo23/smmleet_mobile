@@ -3,13 +3,14 @@ import { View, TextInput, Button, Text, StyleSheet, Image, TouchableOpacity, Scr
 import { MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native'; 
 
-const ForgetPassword = () => {
-  const [email, setEmail] = useState('');
+const PasswordReset = () => {
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigation = useNavigation(); 
 
   const handleResetPassword = () => {
     console.log('Reset password button clicked');
-    navigation.navigate('PasswordReset');
   };
 
   const handleGotoLogin = () => {
@@ -21,14 +22,25 @@ const ForgetPassword = () => {
       <View style={styles.container}>
         <Image source={require('../../assets/smmleetword.png')} style={styles.logoTop} />
         <Text style={styles.titleName}>Reset Password</Text>
-        <Text style={styles.subtitle}>Enter your register email to reset your password</Text>
 
+        <View style={styles.passwordInputContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="New Password"
+            value={newPassword}
+            onChangeText={setNewPassword}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeIcon}>
+            <MaterialIcons name={showPassword ? 'visibility' : 'visibility-off'} size={24} color="#333" />
+          </TouchableOpacity>
+        </View>
         <TextInput
           style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry={!showPassword}
         />
 
         <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
@@ -64,13 +76,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: '#333',
     marginTop: -30,
-  },
-  subtitle: {
-    fontSize: 16,
-    fontWeight: 'normal',
-    marginBottom: 20,
-    color: '#333',
-    textAlign:'center'
   },
   label: {
     color: '#333',
@@ -123,6 +128,11 @@ const styles = StyleSheet.create({
     color: '#800080',
     textDecorationLine: 'none',
   },
+  forgetInLink: {
+    color: '#800080',
+    textDecorationLine: 'none',
+    textAlign: 'left',
+  },
 });
 
-export default ForgetPassword;
+export default PasswordReset;

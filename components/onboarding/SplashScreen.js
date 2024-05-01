@@ -20,7 +20,7 @@ const SplashScreen = () => {
   const navigation = useNavigation(); 
 
   const handleGetStarted = () => {
-    navigation.navigate('SignUp'); 
+    navigation.navigate('Login'); 
   };
 
   return (
