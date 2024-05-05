@@ -10,6 +10,7 @@ import PasswordReset from '../onboarding/PasswordReset';
 import ResetOTP from '../onboarding/PasswordResetOtp';
 import PasswordResetSuccessful from '../onboarding/PasswordResetSuccessful';
 import SignupSuccessful from '../onboarding/SignupSuccess';
+import Web from '../onboarding/web';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,7 @@ const Router = () => {
         <Stack.Screen name="PasswordResetOtp" component={ResetOTP} />
         <Stack.Screen name="PasswordResetSuccess" component={PasswordResetSuccessful} />
         <Stack.Screen name="SignupSuccess" component={SignupSuccessful} />
+        <Stack.Screen name="Web" component={Web} />
       </Stack.Navigator>
     </NavigationContainer>
   );
