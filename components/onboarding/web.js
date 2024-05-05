@@ -17,11 +17,11 @@ const Web = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff', 
+    backgroundColor: '#fff',
   },
   webview: {
     flex: 1,
-    marginTop: 20,
+    marginTop: 0,
   },
 });
 
