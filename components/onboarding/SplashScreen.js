@@ -20,7 +20,7 @@ const SplashScreen = () => {
   const navigation = useNavigation(); 
 
   const handleGetStarted = () => {
-    navigation.navigate('Web'); 
+    navigation.navigate('Login'); 
   };
 
   return (
