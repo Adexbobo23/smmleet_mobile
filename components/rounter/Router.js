@@ -20,14 +20,21 @@ import ComingSoon from '../screens/ComingSoon';
 import ApiKeys from '../screens/Apikeys';
 import OrderDetails from '../screens/Orderdetails';
 
+// SMS Screens
+import SMSActivation from '../screens/SMSActivation';
+import SMSRental from '../screens/SMSRental';
+import SMSHistory from '../screens/SMSHistory';
+
 const Router = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
   const [comingSoonTitle, setComingSoonTitle] = useState('Feature');
+  const [routeParams, setRouteParams] = useState({});
 
   const navigate = (screenName, params = {}) => {
     if (screenName === 'ComingSoon') {
       setComingSoonTitle(params.title || 'Feature');
     }
+    setRouteParams(params);
     setCurrentScreen(screenName);
   };
 
@@ -75,15 +82,19 @@ const Router = () => {
       case 'ApiKeys':
         return <ApiKeys navigate={navigate} />;
       case 'OrderDetails':
-        return <OrderDetails navigate={navigate} orderId={params?.orderId} />;
+        return <OrderDetails navigate={navigate} orderId={routeParams?.orderId} />;
+
+      // SMS Screens
+      case 'SMSActivation':
+        return <SMSActivation navigate={navigate} />;
+      case 'SMSRental':
+        return <SMSRental navigate={navigate} />;
+      case 'SMSHistory':
+        return <SMSHistory navigate={navigate} route={{ params: routeParams }} />;
 
       // Coming Soon Screens
       case 'ComingSoon':
         return <ComingSoon navigate={navigate} title={comingSoonTitle} />;
-      case 'RentSMS':
-        return <ComingSoon navigate={navigate} title="Rent SMS" />;
-      case 'ActivateSMS':
-        return <ComingSoon navigate={navigate} title="Activate SMS" />;
       case 'ChildPanel':
         return <ComingSoon navigate={navigate} title="Child Panel" />;
       case 'Referrals':

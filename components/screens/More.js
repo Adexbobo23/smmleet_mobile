@@ -34,6 +34,10 @@ import {
   faEnvelope,
   faKey,
   faRefresh,
+  faMobileAlt,
+  faCalendarAlt,
+  faHistory,
+  faSms,
 } from '@fortawesome/free-solid-svg-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import BottomNav from '../BottomNav';
@@ -185,6 +189,34 @@ const More = ({ navigate }) => {
   };
 
   const menuSections = [
+    // ========== SMS SERVICES SECTION ==========
+    {
+      title: 'SMS Services',
+      items: [
+        { 
+          name: 'SMS Activation', 
+          icon: faMobileAlt, 
+          screen: 'SMSActivation', 
+          color: '#800080',
+          description: 'Get verification codes instantly'
+        },
+        { 
+          name: 'SMS Rental', 
+          icon: faCalendarAlt, 
+          screen: 'SMSRental', 
+          color: '#3b82f6',
+          description: 'Rent a number for extended use'
+        },
+        { 
+          name: 'SMS History', 
+          icon: faHistory, 
+          screen: 'SMSHistory', 
+          color: '#10b981',
+          description: 'View all SMS transactions'
+        },
+      ],
+    },
+    // ========== END SMS SERVICES SECTION ==========
     {
       title: 'Orders & Services',
       items: [
@@ -418,8 +450,16 @@ const More = ({ navigate }) => {
         {menuSections.map((section, sectionIndex) => (
           <View key={sectionIndex} style={styles.menuSection}>
             <View style={styles.sectionHeader}>
-              <View style={styles.sectionIndicator} />
+              <View style={[
+                styles.sectionIndicator, 
+                section.title === 'SMS Services' && { backgroundColor: '#800080' }
+              ]} />
               <Text style={styles.sectionTitle}>{section.title}</Text>
+              {section.title === 'SMS Services' && (
+                <View style={styles.newBadge}>
+                  <Text style={styles.newBadgeText}>NEW</Text>
+                </View>
+              )}
             </View>
             
             <View style={styles.menuCard}>
@@ -756,6 +796,19 @@ const styles = StyleSheet.create({
     color: '#475569',
     letterSpacing: 0.5,
     textTransform: 'uppercase',
+  },
+  newBadge: {
+    backgroundColor: '#800080',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 6,
+    marginLeft: 10,
+  },
+  newBadgeText: {
+    color: '#fff',
+    fontSize: 9,
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
   },
   menuCard: {
     backgroundColor: '#fff',
