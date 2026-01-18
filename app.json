@@ -2,7 +2,7 @@
   "expo": {
     "name": "smmleet",
     "slug": "smmleet",
-    "version": "1.0.2",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -20,8 +20,8 @@
     "android": {
       "package": "com.upsleethub.smmleet",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
