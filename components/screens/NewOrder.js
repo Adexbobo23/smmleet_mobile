@@ -1,5 +1,6 @@
 // FIXED: Services now load correctly with proper API parsing
 // Enhanced UI matching Dashboard.js design
+// Updated: Alert messages replaced with custom modal
 
 import React, { useState, useEffect, useRef } from 'react';
 import {
@@ -10,7 +11,6 @@ import {
   TouchableOpacity,
   TextInput,
   Dimensions,
-  Alert,
   Modal,
   FlatList,
   ActivityIndicator,
@@ -27,7 +27,9 @@ import {
   faTimes,
   faPlus,
   faShoppingBag,
-  faChartLine,
+  faCheckCircle,
+  faTimesCircle,
+  faExclamationTriangle,
 } from '@fortawesome/free-solid-svg-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import BottomNav from '../BottomNav';
@@ -50,6 +52,17 @@ const NewOrder = ({ navigate }) => {
   const [showCategoryModal, setShowCategoryModal] = useState(false);
   const [showServiceModal, setShowServiceModal] = useState(false);
   const [placingOrder, setPlacingOrder] = useState(false);
+  
+  // Order Result Modal State
+  const [orderResultModal, setOrderResultModal] = useState({
+    visible: false,
+    success: false,
+    title: '',
+    message: '',
+    orderId: '',
+    charge: '',
+    showViewOrders: false,
+  });
 
   const linkRef = useRef(null);
   const quantityRef = useRef(null);
@@ -76,7 +89,15 @@ const NewOrder = ({ navigate }) => {
       }
     } catch (error) {
       console.error('Error loading categories:', error);
-      Alert.alert('Error', 'Failed to load categories');
+      setOrderResultModal({
+        visible: true,
+        success: false,
+        title: 'Error',
+        message: 'Failed to load categories',
+        orderId: '',
+        charge: '',
+        showViewOrders: false,
+      });
       setCategories([]);
     } finally {
       setLoading(false);
@@ -101,12 +122,28 @@ const NewOrder = ({ navigate }) => {
         setSelectedService(null);
         setShowServiceDesc(false);
         if (categoryId) {
-          Alert.alert('No Services', 'No services available for this category');
+          setOrderResultModal({
+            visible: true,
+            success: false,
+            title: 'No Services',
+            message: 'No services available for this category',
+            orderId: '',
+            charge: '',
+            showViewOrders: false,
+          });
         }
       }
     } catch (error) {
       console.error('Error loading services:', error);
-      Alert.alert('Error', 'Failed to load services: ' + error.message);
+      setOrderResultModal({
+        visible: true,
+        success: false,
+        title: 'Error',
+        message: 'Failed to load services: ' + error.message,
+        orderId: '',
+        charge: '',
+        showViewOrders: false,
+      });
       setServices([]);
     }
   };
@@ -148,22 +185,68 @@ const NewOrder = ({ navigate }) => {
     }
   };
 
+  const handleOrderResultClose = (action) => {
+    const wasSuccess = orderResultModal.success;
+    setOrderResultModal({
+      visible: false,
+      success: false,
+      title: '',
+      message: '',
+      orderId: '',
+      charge: '',
+      showViewOrders: false,
+    });
+    
+    if (action === 'viewOrders') {
+      navigate('Orders');
+    } else if (wasSuccess || action === 'newOrder') {
+      setLink('');
+      setQuantity(minMax.min.toString());
+      setSelectedService(null);
+      setShowServiceDesc(false);
+    }
+  };
+
   const handlePlaceOrder = async () => {
     Keyboard.dismiss();
 
     if (!selectedService) {
-      Alert.alert('Error', 'Please select a service');
+      setOrderResultModal({
+        visible: true,
+        success: false,
+        title: 'Error',
+        message: 'Please select a service',
+        orderId: '',
+        charge: '',
+        showViewOrders: false,
+      });
       return;
     }
     
     if (!link.trim()) {
-      Alert.alert('Error', 'Please enter a link');
+      setOrderResultModal({
+        visible: true,
+        success: false,
+        title: 'Error',
+        message: 'Please enter a link',
+        orderId: '',
+        charge: '',
+        showViewOrders: false,
+      });
       return;
     }
 
     const qty = parseInt(quantity);
     if (isNaN(qty) || qty < minMax.min || qty > minMax.max) {
-      Alert.alert('Error', `Quantity must be between ${minMax.min} and ${minMax.max}`);
+      setOrderResultModal({
+        visible: true,
+        success: false,
+        title: 'Error',
+        message: `Quantity must be between ${minMax.min} and ${minMax.max}`,
+        orderId: '',
+        charge: '',
+        showViewOrders: false,
+      });
       return;
     }
 
@@ -178,31 +261,37 @@ const NewOrder = ({ navigate }) => {
       const response = await ApiService.createOrder(orderData);
       
       if (response.success || response.order_id) {
-        Alert.alert(
-          'Order Placed Successfully! ✅',
-          `Your order has been placed.\nOrder ID: ${response.order_id || response.display_id || response.id}\nTotal: $${response.charge || totalCharge}`,
-          [
-            { 
-              text: 'View Orders', 
-              onPress: () => navigate('Orders')
-            },
-            { 
-              text: 'New Order', 
-              onPress: () => {
-                setLink('');
-                setQuantity(minMax.min.toString());
-                setSelectedService(null);
-                setShowServiceDesc(false);
-              }
-            }
-          ]
-        );
+        setOrderResultModal({
+          visible: true,
+          success: true,
+          title: 'Order Placed Successfully!',
+          message: 'Your order has been placed and is being processed.',
+          orderId: response.order_id || response.display_id || response.id,
+          charge: response.charge || totalCharge,
+          showViewOrders: true,
+        });
       } else {
-        Alert.alert('Order Failed', response.message || 'Failed to place order');
+        setOrderResultModal({
+          visible: true,
+          success: false,
+          title: 'Order Failed',
+          message: response.message || 'Failed to place order',
+          orderId: '',
+          charge: '',
+          showViewOrders: false,
+        });
       }
     } catch (error) {
       console.error('Error placing order:', error);
-      Alert.alert('Order Failed', error.message || 'Failed to place order. Please try again.');
+      setOrderResultModal({
+        visible: true,
+        success: false,
+        title: 'Order Failed',
+        message: error.message || 'Failed to place order. Please try again.',
+        orderId: '',
+        charge: '',
+        showViewOrders: false,
+      });
     } finally {
       setPlacingOrder(false);
     }
@@ -316,7 +405,15 @@ const NewOrder = ({ navigate }) => {
                   if (services.length > 0) {
                     setShowServiceModal(true);
                   } else {
-                    Alert.alert('No Services', 'No services available for this category. Please select a different category.');
+                    setOrderResultModal({
+                      visible: true,
+                      success: false,
+                      title: 'No Services',
+                      message: 'No services available for this category. Please select a different category.',
+                      orderId: '',
+                      charge: '',
+                      showViewOrders: false,
+                    });
                   }
                 }}>
                 <View style={styles.selectContent}>
@@ -543,6 +640,105 @@ const NewOrder = ({ navigate }) => {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.modalList}
             />
+          </View>
+        </View>
+      </Modal>
+
+      {/* Order Result Modal */}
+      <Modal
+        visible={orderResultModal.visible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => handleOrderResultClose()}>
+        <View style={styles.resultModalOverlay}>
+          <View style={styles.resultModalContainer}>
+            {/* Icon */}
+            <View style={[
+              styles.resultIconContainer,
+              { backgroundColor: orderResultModal.success ? '#dcfce7' : '#fee2e2' }
+            ]}>
+              <LinearGradient
+                colors={orderResultModal.success 
+                  ? ['#22c55e', '#16a34a'] 
+                  : ['#ef4444', '#dc2626']}
+                style={styles.resultIconGradient}>
+                <FontAwesomeIcon 
+                  icon={orderResultModal.success ? faCheckCircle : faTimesCircle} 
+                  size={40} 
+                  color="#fff" 
+                />
+              </LinearGradient>
+            </View>
+
+            {/* Title */}
+            <Text style={[
+              styles.resultTitle,
+              { color: orderResultModal.success ? '#15803d' : '#991b1b' }
+            ]}>
+              {orderResultModal.title}
+            </Text>
+
+            {/* Message */}
+            <Text style={styles.resultMessage}>
+              {orderResultModal.message}
+            </Text>
+
+            {/* Order Details (only for success) */}
+            {orderResultModal.success && orderResultModal.orderId && (
+              <View style={styles.orderDetailsContainer}>
+                <View style={styles.orderDetailRow}>
+                  <Text style={styles.orderDetailLabel}>Order ID</Text>
+                  <Text style={styles.orderDetailValue}>#{orderResultModal.orderId}</Text>
+                </View>
+                <View style={styles.orderDetailDivider} />
+                <View style={styles.orderDetailRow}>
+                  <Text style={styles.orderDetailLabel}>Total Charge</Text>
+                  <Text style={styles.orderDetailValueHighlight}>${orderResultModal.charge}</Text>
+                </View>
+              </View>
+            )}
+
+            {/* Buttons */}
+            {orderResultModal.showViewOrders ? (
+              <View style={styles.resultButtonsRow}>
+                <TouchableOpacity
+                  style={styles.resultSecondaryBtn}
+                  onPress={() => handleOrderResultClose('newOrder')}
+                  activeOpacity={0.9}>
+                  <Text style={styles.resultSecondaryBtnText}>New Order</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity
+                  style={styles.resultPrimaryBtn}
+                  onPress={() => handleOrderResultClose('viewOrders')}
+                  activeOpacity={0.9}>
+                  <LinearGradient
+                    colors={['#800080', '#9933cc', '#b84dff']}
+                    style={styles.resultPrimaryBtnGradient}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}>
+                    <Text style={styles.resultPrimaryBtnText}>View Orders</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.resultCloseBtn}
+                onPress={() => handleOrderResultClose()}
+                activeOpacity={0.9}>
+                <LinearGradient
+                  colors={orderResultModal.success 
+                    ? ['#800080', '#9933cc', '#b84dff']
+                    : ['#64748b', '#475569']}
+                  style={styles.resultCloseBtnGradient}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}>
+                  <Text style={styles.resultCloseBtnText}>
+                    {orderResultModal.success ? 'Continue' : 'Try Again'}
+                  </Text>
+                </LinearGradient>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </Modal>
@@ -975,6 +1171,151 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     height: 120,
+  },
+  // Order Result Modal Styles
+  resultModalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  resultModalContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 28,
+    padding: 32,
+    width: '100%',
+    maxWidth: 340,
+    alignItems: 'center',
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+  },
+  resultIconContainer: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 24,
+  },
+  resultIconGradient: {
+    width: 70,
+    height: 70,
+    borderRadius: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resultTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  resultMessage: {
+    fontSize: 14,
+    color: '#64748b',
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: 24,
+    fontWeight: '500',
+  },
+  orderDetailsContainer: {
+    backgroundColor: '#f8fafc',
+    borderRadius: 16,
+    padding: 20,
+    width: '100%',
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#f1f5f9',
+  },
+  orderDetailRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  orderDetailLabel: {
+    fontSize: 13,
+    color: '#64748b',
+    fontWeight: '600',
+  },
+  orderDetailValue: {
+    fontSize: 14,
+    color: '#1e293b',
+    fontWeight: '700',
+    fontFamily: 'monospace',
+  },
+  orderDetailValueHighlight: {
+    fontSize: 18,
+    color: '#800080',
+    fontWeight: 'bold',
+  },
+  orderDetailDivider: {
+    height: 1,
+    backgroundColor: '#e2e8f0',
+    marginVertical: 14,
+  },
+  resultButtonsRow: {
+    flexDirection: 'row',
+    width: '100%',
+    gap: 12,
+  },
+  resultSecondaryBtn: {
+    flex: 1,
+    borderRadius: 14,
+    borderWidth: 2,
+    borderColor: '#e2e8f0',
+    paddingVertical: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#f8fafc',
+  },
+  resultSecondaryBtnText: {
+    color: '#64748b',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  resultPrimaryBtn: {
+    flex: 1,
+    borderRadius: 14,
+    overflow: 'hidden',
+    elevation: 4,
+    shadowColor: '#800080',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+  },
+  resultPrimaryBtnGradient: {
+    paddingVertical: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resultPrimaryBtnText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  resultCloseBtn: {
+    width: '100%',
+    borderRadius: 14,
+    overflow: 'hidden',
+    elevation: 4,
+    shadowColor: '#800080',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+  },
+  resultCloseBtnGradient: {
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  resultCloseBtnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

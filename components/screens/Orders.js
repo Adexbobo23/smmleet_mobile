@@ -1,5 +1,6 @@
 // ENHANCED: Beautiful Orders screen with modern design and appropriate icons
-// Added stats summary, progress indicators, and polished UI elements
+// FIXED: Icon errors - replaced non-existent icons with valid ones
+// FIXED: Alert replaced with custom modal
 
 import React, { useState, useEffect } from 'react';
 import {
@@ -11,7 +12,7 @@ import {
   TextInput,
   RefreshControl,
   ActivityIndicator,
-  Alert,
+  Modal,
   Dimensions,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
@@ -20,22 +21,23 @@ import {
   faSearch,
   faCircleNotch,
   faClock,
-  faXmark,
+  faTimes,
   faEye,
   faChartLine,
-  faSparkles,
+  faStar,
   faLink,
   faShoppingBag,
   faHourglassHalf,
   faCheckCircle,
   faTimesCircle,
   faHashtag,
-  faBoxes,
+  faCubes,
   faDollarSign,
   faCalendarAlt,
   faChartBar,
   faPlayCircle,
   faPlus,
+  faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import BottomNav from '../BottomNav';
@@ -72,6 +74,19 @@ const Orders = ({ navigate }) => {
     pending: 0,
   });
 
+  // Modal States
+  const [alertModal, setAlertModal] = useState({
+    visible: false,
+    success: true,
+    title: '',
+    message: '',
+  });
+
+  const [orderDetailModal, setOrderDetailModal] = useState({
+    visible: false,
+    order: null,
+  });
+
   useEffect(() => {
     loadOrders();
   }, []);
@@ -95,7 +110,12 @@ const Orders = ({ navigate }) => {
       }
     } catch (error) {
       console.error('Error loading orders:', error);
-      Alert.alert('Error', 'Failed to load orders');
+      setAlertModal({
+        visible: true,
+        success: false,
+        title: 'Error',
+        message: 'Failed to load orders',
+      });
       setOrders([]);
     } finally {
       setLoading(false);
@@ -171,7 +191,7 @@ const Orders = ({ navigate }) => {
           bg: '#dcfce7',
           border: '#bbf7d0',
           text: '#15803d',
-          icon: faCheckCircle || FALLBACK_ICON,
+          icon: faCheckCircle,
         };
       case 'processing':
       case 'in_progress':
@@ -179,14 +199,14 @@ const Orders = ({ navigate }) => {
           bg: '#dbeafe',
           border: '#bfdbfe',
           text: '#1e40af',
-          icon: faCircleNotch || FALLBACK_ICON,
+          icon: faCircleNotch,
         };
       case 'pending':
         return {
           bg: '#fed7aa',
           border: '#fdba74',
           text: '#9a3412',
-          icon: faHourglassHalf || FALLBACK_ICON,
+          icon: faHourglassHalf,
         };
       case 'failed':
       case 'cancelled':
@@ -195,7 +215,7 @@ const Orders = ({ navigate }) => {
           bg: '#fee2e2',
           border: '#fecaca',
           text: '#991b1b',
-          icon: faTimesCircle || FALLBACK_ICON,
+          icon: faTimesCircle,
         };
       default:
         return defaultStyle;
@@ -221,6 +241,13 @@ const Orders = ({ navigate }) => {
     if (!order.quantity || order.quantity === 0) return 0;
     const delivered = order.quantity - (order.remains || 0);
     return Math.min(100, Math.round((delivered / order.quantity) * 100));
+  };
+
+  const showOrderDetails = (order) => {
+    setOrderDetailModal({
+      visible: true,
+      order: order,
+    });
   };
 
   if (loading) {
@@ -271,7 +298,7 @@ const Orders = ({ navigate }) => {
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={() => setSearchQuery('')} style={styles.clearButton}>
-              <FontAwesomeIcon icon={faXmark} size={14} color="#94a3b8" />
+              <FontAwesomeIcon icon={faTimes} size={14} color="#94a3b8" />
             </TouchableOpacity>
           )}
         </View>
@@ -370,7 +397,7 @@ const Orders = ({ navigate }) => {
               <LinearGradient
                 colors={['#f3e8ff', '#faf5ff']}
                 style={styles.emptyIconGradient}>
-                <FontAwesomeIcon icon={faSparkles} size={40} color="#800080" />
+                <FontAwesomeIcon icon={faStar} size={40} color="#800080" />
               </LinearGradient>
             </View>
             <Text style={styles.emptyTitle}>No orders found</Text>
@@ -397,15 +424,6 @@ const Orders = ({ navigate }) => {
           filteredOrders.map((order, index) => {
             const statusStyle = getStatusStyle(order.status);
             const progress = getProgressPercentage(order);
-            
-            // Debug logging
-            if (!statusStyle || !statusStyle.icon) {
-              console.log('⚠️ WARNING: Invalid statusStyle for order:', {
-                orderId: order.id,
-                status: order.status,
-                statusStyle: statusStyle,
-              });
-            }
             
             return (
               <View key={order.id || index} style={styles.orderCard}>
@@ -505,7 +523,7 @@ const Orders = ({ navigate }) => {
                   end={{ x: 1, y: 0 }}>
                   <View style={styles.detailItem}>
                     <View style={styles.detailIconWrapper}>
-                      <FontAwesomeIcon icon={faBoxes} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faCubes} size={12} color="#800080" />
                     </View>
                     <Text style={styles.detailLabel}>Quantity</Text>
                     <Text style={styles.detailValue}>{order.quantity || 0}</Text>
@@ -548,13 +566,7 @@ const Orders = ({ navigate }) => {
                   <TouchableOpacity 
                     style={styles.viewButton} 
                     activeOpacity={0.8}
-                    onPress={() => {
-                      Alert.alert(
-                        'Order Details',
-                        `Order ID: ${order.order_id || order.id}\nService: ${order.service_name || 'N/A'}\nStatus: ${order.status}\nQuantity: ${order.quantity}\nCharge: $${parseFloat(order.charge || 0).toFixed(2)}`,
-                        [{ text: 'OK' }]
-                      );
-                    }}>
+                    onPress={() => showOrderDetails(order)}>
                     <LinearGradient
                       colors={['#f3e8ff', '#faf5ff']}
                       style={styles.viewButtonGradient}>
@@ -570,6 +582,234 @@ const Orders = ({ navigate }) => {
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
+
+      {/* Alert Modal */}
+      <Modal
+        visible={alertModal.visible}
+        transparent={true}
+        animationType="fade"
+        onRequestClose={() => setAlertModal({ ...alertModal, visible: false })}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.alertModalContainer}>
+            <View style={[
+              styles.alertIconContainer,
+              { backgroundColor: alertModal.success ? '#dcfce7' : '#fee2e2' }
+            ]}>
+              <LinearGradient
+                colors={alertModal.success 
+                  ? ['#22c55e', '#16a34a'] 
+                  : ['#ef4444', '#dc2626']}
+                style={styles.alertIconGradient}>
+                <FontAwesomeIcon 
+                  icon={alertModal.success ? faCheckCircle : faTimesCircle} 
+                  size={32} 
+                  color="#fff" 
+                />
+              </LinearGradient>
+            </View>
+
+            <Text style={[
+              styles.alertTitle,
+              { color: alertModal.success ? '#15803d' : '#991b1b' }
+            ]}>
+              {alertModal.title}
+            </Text>
+
+            <Text style={styles.alertMessage}>
+              {alertModal.message}
+            </Text>
+
+            <TouchableOpacity
+              style={styles.alertCloseBtn}
+              onPress={() => setAlertModal({ ...alertModal, visible: false })}
+              activeOpacity={0.9}>
+              <LinearGradient
+                colors={alertModal.success 
+                  ? ['#800080', '#9933cc', '#b84dff']
+                  : ['#64748b', '#475569']}
+                style={styles.alertCloseBtnGradient}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}>
+                <Text style={styles.alertCloseBtnText}>OK</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
+      {/* Order Detail Modal */}
+      <Modal
+        visible={orderDetailModal.visible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setOrderDetailModal({ visible: false, order: null })}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.detailModalContainer}>
+            {orderDetailModal.order && (
+              <>
+                {/* Modal Header */}
+                <View style={styles.detailModalHeader}>
+                  <View style={styles.detailModalIcon}>
+                    <LinearGradient
+                      colors={['#f3e8ff', '#faf5ff']}
+                      style={styles.detailModalIconGradient}>
+                      <FontAwesomeIcon icon={faInfoCircle} size={20} color="#800080" />
+                    </LinearGradient>
+                  </View>
+                  <Text style={styles.detailModalTitle}>Order Details</Text>
+                  <TouchableOpacity 
+                    onPress={() => setOrderDetailModal({ visible: false, order: null })}
+                    style={styles.detailModalCloseBtn}>
+                    <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                  </TouchableOpacity>
+                </View>
+
+                {/* Order Info */}
+                <ScrollView style={styles.detailModalContent} showsVerticalScrollIndicator={false}>
+                  {/* Order ID & Status */}
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faHashtag} size={12} color="#800080" />
+                      <Text style={styles.detailModalLabel}>Order ID</Text>
+                    </View>
+                    <Text style={styles.detailModalValue}>
+                      {orderDetailModal.order.order_id || orderDetailModal.order.id}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faChartLine} size={12} color="#800080" />
+                      <Text style={styles.detailModalLabel}>Service</Text>
+                    </View>
+                    <Text style={styles.detailModalValueSmall} numberOfLines={2}>
+                      {orderDetailModal.order.service_name || 'N/A'}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon 
+                        icon={getStatusStyle(orderDetailModal.order.status).icon} 
+                        size={12} 
+                        color={getStatusStyle(orderDetailModal.order.status).text} 
+                      />
+                      <Text style={styles.detailModalLabel}>Status</Text>
+                    </View>
+                    <View style={[
+                      styles.detailModalStatusBadge,
+                      { 
+                        backgroundColor: getStatusStyle(orderDetailModal.order.status).bg,
+                        borderColor: getStatusStyle(orderDetailModal.order.status).border,
+                      }
+                    ]}>
+                      <Text style={[
+                        styles.detailModalStatusText,
+                        { color: getStatusStyle(orderDetailModal.order.status).text }
+                      ]}>
+                        {orderDetailModal.order.status?.toUpperCase() || 'PENDING'}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faCubes} size={12} color="#800080" />
+                      <Text style={styles.detailModalLabel}>Quantity</Text>
+                    </View>
+                    <Text style={styles.detailModalValue}>
+                      {orderDetailModal.order.quantity || 0}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faDollarSign} size={12} color="#800080" />
+                      <Text style={styles.detailModalLabel}>Charge</Text>
+                    </View>
+                    <Text style={styles.detailModalValueHighlight}>
+                      ${parseFloat(orderDetailModal.order.charge || 0).toFixed(2)}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faLink} size={12} color="#800080" />
+                      <Text style={styles.detailModalLabel}>Link</Text>
+                    </View>
+                    <Text style={styles.detailModalValueSmall} numberOfLines={2}>
+                      {orderDetailModal.order.link || 'N/A'}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faPlayCircle} size={12} color="#059669" />
+                      <Text style={styles.detailModalLabel}>Start Count</Text>
+                    </View>
+                    <Text style={styles.detailModalValue}>
+                      {orderDetailModal.order.start_count || 0}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faHourglassHalf} size={12} color="#f59e0b" />
+                      <Text style={styles.detailModalLabel}>Remains</Text>
+                    </View>
+                    <Text style={[
+                      styles.detailModalValue,
+                      { color: (orderDetailModal.order.remains || 0) === 0 ? '#15803d' : '#f59e0b' }
+                    ]}>
+                      {orderDetailModal.order.remains || 0}
+                    </Text>
+                  </View>
+
+                  <View style={styles.detailModalDivider} />
+
+                  <View style={styles.detailModalRow}>
+                    <View style={styles.detailModalLabelContainer}>
+                      <FontAwesomeIcon icon={faCalendarAlt} size={12} color="#800080" />
+                      <Text style={styles.detailModalLabel}>Created</Text>
+                    </View>
+                    <Text style={styles.detailModalValue}>
+                      {formatDate(orderDetailModal.order.created_at)}
+                    </Text>
+                  </View>
+                </ScrollView>
+
+                {/* Close Button */}
+                <TouchableOpacity
+                  style={styles.detailModalCloseButton}
+                  onPress={() => setOrderDetailModal({ visible: false, order: null })}
+                  activeOpacity={0.9}>
+                  <LinearGradient
+                    colors={['#800080', '#9933cc', '#b84dff']}
+                    style={styles.detailModalCloseButtonGradient}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}>
+                    <Text style={styles.detailModalCloseButtonText}>Close</Text>
+                  </LinearGradient>
+                </TouchableOpacity>
+              </>
+            )}
+          </View>
+        </View>
+      </Modal>
 
       <BottomNav navigate={navigate} currentScreen="Orders" />
     </View>
@@ -1133,6 +1373,199 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     height: 120,
+  },
+  // Modal Styles
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  // Alert Modal
+  alertModalContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 28,
+    padding: 32,
+    width: '100%',
+    maxWidth: 340,
+    alignItems: 'center',
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+  },
+  alertIconContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  alertIconGradient: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  alertTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  alertMessage: {
+    fontSize: 14,
+    color: '#64748b',
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: 24,
+    fontWeight: '500',
+  },
+  alertCloseBtn: {
+    width: '100%',
+    borderRadius: 14,
+    overflow: 'hidden',
+    elevation: 4,
+    shadowColor: '#800080',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+  },
+  alertCloseBtnGradient: {
+    paddingVertical: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  alertCloseBtnText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  // Order Detail Modal
+  detailModalContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 24,
+    width: '100%',
+    maxWidth: 380,
+    maxHeight: '80%',
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.25,
+    shadowRadius: 16,
+    overflow: 'hidden',
+  },
+  detailModalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f1f5f9',
+    backgroundColor: '#fafbff',
+  },
+  detailModalIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    overflow: 'hidden',
+    marginRight: 14,
+  },
+  detailModalIconGradient: {
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailModalTitle: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1e293b',
+  },
+  detailModalCloseBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: '#f8fafc',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailModalContent: {
+    padding: 20,
+  },
+  detailModalRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 4,
+  },
+  detailModalLabelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  detailModalLabel: {
+    fontSize: 13,
+    color: '#64748b',
+    fontWeight: '600',
+    marginLeft: 10,
+  },
+  detailModalValue: {
+    fontSize: 14,
+    color: '#1e293b',
+    fontWeight: '700',
+  },
+  detailModalValueSmall: {
+    fontSize: 12,
+    color: '#1e293b',
+    fontWeight: '600',
+    maxWidth: '50%',
+    textAlign: 'right',
+  },
+  detailModalValueHighlight: {
+    fontSize: 16,
+    color: '#800080',
+    fontWeight: 'bold',
+  },
+  detailModalStatusBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+    borderWidth: 1.5,
+  },
+  detailModalStatusText: {
+    fontSize: 10,
+    fontWeight: 'bold',
+    letterSpacing: 0.5,
+  },
+  detailModalDivider: {
+    height: 1,
+    backgroundColor: '#f1f5f9',
+    marginVertical: 12,
+  },
+  detailModalCloseButton: {
+    margin: 20,
+    marginTop: 0,
+    borderRadius: 14,
+    overflow: 'hidden',
+    elevation: 4,
+    shadowColor: '#800080',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+  },
+  detailModalCloseButtonGradient: {
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  detailModalCloseButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
