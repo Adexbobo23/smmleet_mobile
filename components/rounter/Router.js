@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { BackHandler } from 'react-native';
+
 import Login from '../onboarding/Login';
 import ForgetPassword from '../onboarding/ForgetPassword';
 import SplashScreen from '../onboarding/SplashScreen';
@@ -27,10 +29,12 @@ import SMSHistory from '../screens/SMSHistory';
 
 const Router = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
+  const [history, setHistory] = useState([]);
   const [comingSoonTitle, setComingSoonTitle] = useState('Feature');
   const [routeParams, setRouteParams] = useState({});
 
   const navigate = (screenName, params = {}) => {
+    setHistory((prev) => [...prev, currentScreen]);
     if (screenName === 'ComingSoon') {
       setComingSoonTitle(params.title || 'Feature');
     }
@@ -38,9 +42,35 @@ const Router = () => {
     setCurrentScreen(screenName);
   };
 
+  const goBack = () => {
+    if (history.length > 0) {
+      const previous = history[history.length - 1];
+      setHistory((prev) => prev.slice(0, -1));
+      setCurrentScreen(previous);
+      return true;
+    }
+    return false;
+  };
+
+  // 🔥 Handle Android Back Button
+  useEffect(() => {
+    const onBackPress = () => {
+      if (goBack()) {
+        return true; // prevent app exit
+      }
+      return false; // allow exit only if no history
+    };
+
+    const subscription = BackHandler.addEventListener(
+      'hardwareBackPress',
+      onBackPress
+    );
+
+    return () => subscription.remove();
+  }, [history]);
+
   const renderScreen = () => {
     switch (currentScreen) {
-      // Onboarding Screens
       case 'SplashScreen':
         return <SplashScreen navigate={navigate} />;
       case 'Login':
@@ -56,7 +86,6 @@ const Router = () => {
       case 'PasswordResetSuccessful':
         return <PasswordResetSuccessful navigate={navigate} />;
 
-      // Main App Screens
       case 'Dashboard':
         return <Dashboard navigate={navigate} />;
       case 'NewOrder':
@@ -68,7 +97,6 @@ const Router = () => {
       case 'More':
         return <More navigate={navigate} />;
 
-      // Additional Screens
       case 'ServicesList':
         return <ServicesList navigate={navigate} />;
       case 'MassOrder':
@@ -84,7 +112,6 @@ const Router = () => {
       case 'OrderDetails':
         return <OrderDetails navigate={navigate} orderId={routeParams?.orderId} />;
 
-      // SMS Screens
       case 'SMSActivation':
         return <SMSActivation navigate={navigate} />;
       case 'SMSRental':
@@ -92,7 +119,6 @@ const Router = () => {
       case 'SMSHistory':
         return <SMSHistory navigate={navigate} route={{ params: routeParams }} />;
 
-      // Coming Soon Screens
       case 'ComingSoon':
         return <ComingSoon navigate={navigate} title={comingSoonTitle} />;
       case 'ChildPanel':

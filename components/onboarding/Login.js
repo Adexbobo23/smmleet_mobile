@@ -115,7 +115,7 @@ const Login = ({ navigate }) => {
                 <TextInput
                   ref={usernameRef}
                   style={styles.input}
-                  placeholder="Username or Email"
+                  placeholder="Username"
                   placeholderTextColor="#94a3b8"
                   value={username}
                   onChangeText={setUsername}

@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingHorizontal: 8,
     paddingBottom: 4,
+    marginBottom: 30, 
   },
   navItem: {
     flex: 1,
