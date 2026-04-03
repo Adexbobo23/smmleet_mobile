@@ -546,7 +546,7 @@ const More = ({ navigate }) => {
 
         {/* App Info */}
         <View style={styles.appInfo}>
-          <Text style={styles.versionText}>SMMLEET v1.0.6</Text>
+          <Text style={styles.versionText}>SMMLEET v1.0.7</Text>
           <Text style={styles.copyrightText}>© 2026 All rights reserved</Text>
         </View>
 
