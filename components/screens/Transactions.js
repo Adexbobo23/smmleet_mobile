@@ -305,6 +305,25 @@ const Transactions = ({ navigate }) => {
                           )}
                         </View>
                       )}
+                      {/* Payment gateway badge — shows which gateway processed the transaction */}
+                      {transaction.payment_gateway && (
+                        <View style={[
+                          styles.transactionMetaItem,
+                          styles.gatewayBadge,
+                          transaction.payment_gateway === 'heleket'
+                            ? styles.gatewayBadgeHeleket
+                            : styles.gatewayBadgeCryptomus,
+                        ]}>
+                          <Text style={[
+                            styles.gatewayBadgeText,
+                            transaction.payment_gateway === 'heleket'
+                              ? styles.gatewayBadgeTextHeleket
+                              : styles.gatewayBadgeTextCryptomus,
+                          ]}>
+                            {transaction.payment_gateway === 'heleket' ? 'Heleket' : 'Cryptomus'}
+                          </Text>
+                        </View>
+                      )}
                     </View>
                   </View>
                 </View>
@@ -617,6 +636,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: '500',
   },
+  // ── Payment gateway badge styles ─────────────────────────────────────────
+  gatewayBadge: {
+    paddingHorizontal: 7,
+    paddingVertical: 2,
+    borderRadius: 5,
+    borderWidth: 1,
+  },
+  gatewayBadgeHeleket: {
+    backgroundColor: '#eff6ff',
+    borderColor: '#bfdbfe',
+  },
+  gatewayBadgeCryptomus: {
+    backgroundColor: '#fefce8',
+    borderColor: '#fde68a',
+  },
+  gatewayBadgeText: {
+    fontSize: 9,
+    fontWeight: 'bold',
+    letterSpacing: 0.4,
+  },
+  gatewayBadgeTextHeleket: {
+    color: '#1d4ed8',
+  },
+  gatewayBadgeTextCryptomus: {
+    color: '#92400e',
+  },
+  // ─────────────────────────────────────────────────────────────────────────
   bottomSpacer: {
     height: 100,
   },

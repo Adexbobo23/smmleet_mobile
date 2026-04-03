@@ -467,18 +467,79 @@ class ApiService {
     return this.post('payments/calculate-bonus/', { amount: parseFloat(amount) });
   }
 
+  // ── CRYPTOMUS (disabled — kept for reference, do not delete) ────────────
+  // async createPayment_cryptomus(paymentData) {
+  //   return this.post('payments/create/', {
+  //     amount: parseFloat(paymentData.amount),
+  //     payment_method: paymentData.payment_method,
+  //     currency: paymentData.currency || 'USDT',
+  //     network: paymentData.network || 'tron',
+  //     gateway: 'cryptomus',
+  //   });
+  // }
+  //
+  // async getPaymentStatus_cryptomus(orderId) {
+  //   return this.get(`payments/${orderId}/status/`);
+  // }
+  // ────────────────────────────────────────────────────────────────────────
+
+  // ── HELEKET (active) ─────────────────────────────────────────────────────
+  /**
+   * Create a payment via Heleket gateway.
+   * payment_method must be 'invoice' (Heleket does not support static addresses).
+   */
   async createPayment(paymentData) {
     return this.post('payments/create/', {
       amount: parseFloat(paymentData.amount),
-      payment_method: paymentData.payment_method,
+      payment_method: paymentData.payment_method || 'invoice',
       currency: paymentData.currency || 'USDT',
       network: paymentData.network || 'tron',
+      gateway: 'heleket',                     // ← Heleket active
     });
   }
 
+  /**
+   * Check payment status via Heleket gateway.
+   * Passes ?gateway=heleket so the backend routes to Heleket.
+   */
   async getPaymentStatus(orderId) {
-    return this.get(`payments/${orderId}/status/`);
+    return this.get(`payments/${orderId}/status/?gateway=heleket`);
   }
+
+  // ── Dedicated Heleket endpoints ──────────────────────────────────────────
+
+  /**
+   * Detailed Heleket payment status (uuid or order_id lookup).
+   * GET /api/payments/heleket/<order_id>/status/
+   * Optional: append ?uuid=<uuid> for uuid-based lookup.
+   */
+  async getHeleketPaymentStatus(orderId, uuid = null) {
+    const query = uuid ? `?uuid=${uuid}` : '';
+    return this.get(`payments/heleket/${orderId}/status/${query}`);
+  }
+
+  /**
+   * Fetch user's Heleket payment history stored in the database.
+   * GET /api/payments/heleket/history/
+   * Optional params: { status, limit }
+   */
+  async getHeleketPaymentHistory(params = {}) {
+    const query = new URLSearchParams(params).toString();
+    return this.get(`payments/heleket/history/${query ? '?' + query : ''}`);
+  }
+
+  /**
+   * Ask Heleket to resend the webhook for a payment.
+   * POST /api/payments/heleket/resend-webhook/
+   * Body: { order_id?, uuid? }
+   */
+  async resendHeleketWebhook(orderId = null, uuid = null) {
+    const body = {};
+    if (orderId) body.order_id = orderId;
+    if (uuid) body.uuid = uuid;
+    return this.post('payments/heleket/resend-webhook/', body);
+  }
+  // ─────────────────────────────────────────────────────────────────────────
 
   // ============ SUPPORT ENDPOINTS ============
 

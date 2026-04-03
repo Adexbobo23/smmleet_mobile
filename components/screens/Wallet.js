@@ -47,6 +47,9 @@ const Wallet = ({ navigate }) => {
   const [bonusData, setBonusData] = useState(null);
   const [calculatingBonus, setCalculatingBonus] = useState(false);
 
+  // ── Payment methods: Heleket is active (invoice only).
+  // ── Static address is disabled — Heleket does not support it.
+  // ── To re-enable Cryptomus, restore the gateway field and uncomment static.
   const paymentMethods = [
     { 
       id: 'invoice', 
@@ -55,13 +58,14 @@ const Wallet = ({ navigate }) => {
       color: '#f59e0b',
       description: 'Get a payment link to complete your transaction'
     },
-    { 
-      id: 'static', 
-      name: 'Crypto Payment (Static Address)', 
-      icon: faCheck, 
-      color: '#10b981',
-      description: 'Get a static crypto address for payment'
-    },
+    // ── DISABLED: static address is Cryptomus-only, not supported by Heleket ──
+    // { 
+    //   id: 'static', 
+    //   name: 'Crypto Payment (Static Address)', 
+    //   icon: faCheck, 
+    //   color: '#10b981',
+    //   description: 'Get a static crypto address for payment'
+    // },
   ];
 
   const quickAmounts = ['10', '25', '50', '100', '250', '500'];
@@ -190,12 +194,13 @@ const Wallet = ({ navigate }) => {
     try {
       const paymentData = {
         amount: parseFloat(amount),
-        payment_method: selectedMethod.id,
+        payment_method: selectedMethod.id,  // always 'invoice' with Heleket
         currency: 'USDT',
         network: 'tron',
+        // gateway is set to 'heleket' inside ApiService.createPayment automatically
       };
 
-      console.log('Creating payment:', paymentData);
+      console.log('Creating payment (Heleket):', paymentData);
       const response = await ApiService.createPayment(paymentData);
       console.log('Payment response:', response);
 
@@ -276,21 +281,23 @@ const Wallet = ({ navigate }) => {
     }
 
     try {
+      // Use getPaymentStatus which already appends ?gateway=heleket
       const statusResponse = await ApiService.getPaymentStatus(orderId);
       console.log('Payment status:', statusResponse);
 
       if (statusResponse && statusResponse.success !== false) {
-        const status = statusResponse.status || statusResponse.payment_status;
+        const payStatus = statusResponse.status || statusResponse.payment_status;
         const isFinal = statusResponse.is_final;
 
-        if (status === 'paid' && isFinal) {
+        if (payStatus === 'paid' && isFinal) {
           Alert.alert(
             'Payment Received! 🎉',
             'Your payment has been confirmed and your balance has been updated.',
             [{ text: 'OK', onPress: () => onRefresh() }]
           );
           return;
-        } else if (status === 'cancel' || status === 'fail') {
+        } else if (payStatus === 'cancel' || payStatus === 'fail' || payStatus === 'system_fail') {
+          // Heleket also uses 'cancel', 'fail', 'system_fail'
           Alert.alert('Payment Cancelled', 'The payment was cancelled or failed.');
           return;
         }
