@@ -5,83 +5,51 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  TextInput,
-  Modal,
   Alert,
   ActivityIndicator,
   RefreshControl,
   Linking,
-  Clipboard,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import {
   faWallet,
-  faPlus,
   faReceipt,
   faArrowUp,
   faArrowDown,
-  faCheck,
   faChartLine,
   faClock,
-  faCopy,
   faExternalLinkAlt,
   faInfoCircle,
-  faGift,
 } from '@fortawesome/free-solid-svg-icons';
 import { LinearGradient } from 'expo-linear-gradient';
 import BottomNav from '../BottomNav';
 import ApiService from '../services/api';
 
+// Wallet funding is handled exclusively on the web. Update this if the
+// public site URL ever changes.
+const WEB_FUNDING_URL = 'https://smmleet.com';
+
 const Wallet = ({ navigate }) => {
   const [balance, setBalance] = useState(0);
   const [totalDeposits, setTotalDeposits] = useState(0);
   const [totalSpent, setTotalSpent] = useState(0);
-  const [showAddFundsModal, setShowAddFundsModal] = useState(false);
-  const [amount, setAmount] = useState('');
-  const [selectedMethod, setSelectedMethod] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [processing, setProcessing] = useState(false);
-  const [bonusData, setBonusData] = useState(null);
-  const [calculatingBonus, setCalculatingBonus] = useState(false);
-
-  // ── Payment methods: Heleket is active (invoice only).
-  // ── Static address is disabled — Heleket does not support it.
-  // ── To re-enable Cryptomus, restore the gateway field and uncomment static.
-  const paymentMethods = [
-    { 
-      id: 'invoice', 
-      name: 'Crypto Payment (Invoice)', 
-      icon: faReceipt, 
-      color: '#f59e0b',
-      description: 'Get a payment link to complete your transaction'
-    },
-    // ── DISABLED: static address is Cryptomus-only, not supported by Heleket ──
-    // { 
-    //   id: 'static', 
-    //   name: 'Crypto Payment (Static Address)', 
-    //   icon: faCheck, 
-    //   color: '#10b981',
-    //   description: 'Get a static crypto address for payment'
-    // },
-  ];
-
-  const quickAmounts = ['10', '25', '50', '100', '250', '500'];
 
   useEffect(() => {
     loadWalletData();
   }, []);
 
-  // Calculate bonus when amount changes
-  useEffect(() => {
-    if (amount && parseFloat(amount) >= 5) {
-      calculateBonus();
-    } else {
-      setBonusData(null);
-    }
-  }, [amount]);
+  const openWebFunding = () => {
+    Linking.openURL(WEB_FUNDING_URL).catch(() => {
+      Alert.alert(
+        'Add funds on the web',
+        `To top up your wallet, please visit ${WEB_FUNDING_URL} in your browser and log in.`
+      );
+    });
+  };
 
   const loadWalletData = async () => {
     try {
@@ -121,195 +89,6 @@ const Wallet = ({ navigate }) => {
     setRefreshing(true);
     await loadWalletData();
     setRefreshing(false);
-  };
-
-  const calculateBonus = async () => {
-    const amountValue = parseFloat(amount);
-    if (!amountValue || amountValue < 5) {
-      setBonusData(null);
-      return;
-    }
-
-    setCalculatingBonus(true);
-    try {
-      const response = await ApiService.calculateBonus(amountValue);
-      console.log('Bonus calculation:', response);
-      
-      if (response && response.success !== false) {
-        setBonusData({
-          bonus_percentage: response.bonus_percentage || 0,
-          bonus_amount: parseFloat(response.bonus_amount || 0),
-          total_amount: parseFloat(response.total_amount || amountValue),
-        });
-      }
-    } catch (error) {
-      console.error('Error calculating bonus:', error);
-      setBonusData(null);
-    } finally {
-      setCalculatingBonus(false);
-    }
-  };
-
-  const handleAddFunds = async () => {
-    if (!amount || parseFloat(amount) <= 0) {
-      Alert.alert('Error', 'Please enter a valid amount');
-      return;
-    }
-
-    const amountValue = parseFloat(amount);
-    if (amountValue < 1) {
-      Alert.alert('Error', 'Minimum deposit amount is $1.00');
-      return;
-    }
-    if (amountValue > 50000) {
-      Alert.alert('Error', 'Maximum deposit amount is $50,000.00');
-      return;
-    }
-
-    if (!selectedMethod) {
-      Alert.alert('Error', 'Please select a payment method');
-      return;
-    }
-
-    // Show confirmation with bonus details
-    const bonusText = bonusData 
-      ? `\nBonus: ${bonusData.bonus_percentage}% (+$${bonusData.bonus_amount.toFixed(2)})\nTotal: $${bonusData.total_amount.toFixed(2)}`
-      : '';
-
-    Alert.alert(
-      'Confirm Payment',
-      `Amount: $${amountValue.toFixed(2)}${bonusText}\n\nPayment Method: ${selectedMethod.name}\n\nProceed with payment?`,
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Proceed',
-          onPress: () => createPayment(),
-        }
-      ]
-    );
-  };
-
-  const createPayment = async () => {
-    setProcessing(true);
-    try {
-      const paymentData = {
-        amount: parseFloat(amount),
-        payment_method: selectedMethod.id,  // always 'invoice' with Heleket
-        currency: 'USDT',
-        network: 'tron',
-        // gateway is set to 'heleket' inside ApiService.createPayment automatically
-      };
-
-      console.log('Creating payment (Heleket):', paymentData);
-      const response = await ApiService.createPayment(paymentData);
-      console.log('Payment response:', response);
-
-      if (response && response.success !== false) {
-        setShowAddFundsModal(false);
-        setAmount('');
-        setSelectedMethod(null);
-        setBonusData(null);
-
-        if (selectedMethod.id === 'invoice' && response.payment_url) {
-          // Invoice payment - show payment URL
-          Alert.alert(
-            'Payment Created ✅',
-            `Order ID: ${response.order_id}\n\nYour payment link is ready. Tap "Open Payment" to complete the transaction.\n\nYour balance will be updated automatically after payment confirmation.`,
-            [
-              { 
-                text: 'Copy Order ID', 
-                onPress: () => {
-                  Clipboard.setString(response.order_id);
-                  Alert.alert('Copied', 'Order ID copied to clipboard');
-                }
-              },
-              {
-                text: 'Open Payment',
-                onPress: () => {
-                  Linking.openURL(response.payment_url).catch(err => {
-                    Alert.alert('Error', 'Could not open payment link');
-                    console.error('Error opening URL:', err);
-                  });
-                  // Start polling for payment status
-                  pollPaymentStatus(response.order_id);
-                }
-              },
-              { text: 'Later', onPress: () => onRefresh() }
-            ]
-          );
-        } else if (selectedMethod.id === 'static' && response.address) {
-          // Static address payment
-          Alert.alert(
-            'Payment Address Created ✅',
-            `Please send ${response.currency || 'USDT'} to this address:\n\n${response.address}\n\nNetwork: ${response.network || 'TRC20'}\nOrder ID: ${response.order_id}`,
-            [
-              { 
-                text: 'Copy Address', 
-                onPress: () => {
-                  Clipboard.setString(response.address);
-                  Alert.alert('Copied', 'Payment address copied to clipboard');
-                }
-              },
-              { 
-                text: 'Copy Order ID', 
-                onPress: () => {
-                  Clipboard.setString(response.order_id);
-                  Alert.alert('Copied', 'Order ID copied to clipboard');
-                }
-              },
-              { text: 'OK', onPress: () => onRefresh() }
-            ]
-          );
-        } else {
-          Alert.alert('Success', response.message || 'Payment created successfully');
-          onRefresh();
-        }
-      } else {
-        Alert.alert('Error', response.error || response.message || 'Failed to create payment');
-      }
-    } catch (error) {
-      console.error('Error creating payment:', error);
-      Alert.alert('Payment Failed', error.message || 'Failed to create payment. Please try again.');
-    } finally {
-      setProcessing(false);
-    }
-  };
-
-  const pollPaymentStatus = async (orderId, attempts = 0) => {
-    if (attempts >= 60) { // Poll for 5 minutes max (60 * 5 seconds)
-      return;
-    }
-
-    try {
-      // Use getPaymentStatus which already appends ?gateway=heleket
-      const statusResponse = await ApiService.getPaymentStatus(orderId);
-      console.log('Payment status:', statusResponse);
-
-      if (statusResponse && statusResponse.success !== false) {
-        const payStatus = statusResponse.status || statusResponse.payment_status;
-        const isFinal = statusResponse.is_final;
-
-        if (payStatus === 'paid' && isFinal) {
-          Alert.alert(
-            'Payment Received! 🎉',
-            'Your payment has been confirmed and your balance has been updated.',
-            [{ text: 'OK', onPress: () => onRefresh() }]
-          );
-          return;
-        } else if (payStatus === 'cancel' || payStatus === 'fail' || payStatus === 'system_fail') {
-          // Heleket also uses 'cancel', 'fail', 'system_fail'
-          Alert.alert('Payment Cancelled', 'The payment was cancelled or failed.');
-          return;
-        }
-
-        // Continue polling if not final
-        if (!isFinal) {
-          setTimeout(() => pollPaymentStatus(orderId, attempts + 1), 5000);
-        }
-      }
-    } catch (error) {
-      console.error('Error checking payment status:', error);
-    }
   };
 
   const formatDate = (dateString) => {
@@ -405,21 +184,38 @@ const Wallet = ({ navigate }) => {
             
             <Text style={styles.balanceLabel}>Available Balance</Text>
             <Text style={styles.balanceAmount}>${balance.toFixed(2)}</Text>
-            
+
             <TouchableOpacity
               style={styles.addFundsButton}
-              onPress={() => setShowAddFundsModal(true)}
+              onPress={openWebFunding}
               activeOpacity={0.9}>
               <LinearGradient
                 colors={['#ffffff', '#f8fafc']}
                 style={styles.addFundsGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}>
-                <FontAwesomeIcon icon={faPlus} size={16} color="#800080" />
-                <Text style={styles.addFundsButtonText}>Add Funds</Text>
+                <FontAwesomeIcon icon={faExternalLinkAlt} size={15} color="#800080" />
+                <Text style={styles.addFundsButtonText}>Add Funds on Web</Text>
               </LinearGradient>
             </TouchableOpacity>
           </LinearGradient>
+        </View>
+
+        {/* Fund on web notice */}
+        <View style={styles.webNoticeCard}>
+          <View style={styles.webNoticeIcon}>
+            <FontAwesomeIcon icon={faInfoCircle} size={18} color="#800080" />
+          </View>
+          <View style={styles.webNoticeTextWrap}>
+            <Text style={styles.webNoticeTitle}>Funding is available on the web</Text>
+            <Text style={styles.webNoticeBody}>
+              To add money to your wallet, please visit our website and log in.
+              Your balance updates automatically once your payment is confirmed.
+            </Text>
+            <TouchableOpacity onPress={openWebFunding} activeOpacity={0.8}>
+              <Text style={styles.webNoticeLink}>{WEB_FUNDING_URL}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Stats Cards */}
@@ -536,149 +332,52 @@ const Wallet = ({ navigate }) => {
         <View style={styles.bottomSpacer} />
       </ScrollView>
 
-      {/* Add Funds Modal */}
-      <Modal
-        visible={showAddFundsModal}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setShowAddFundsModal(false)}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalHandle} />
-            
-            <Text style={styles.modalTitle}>Add Funds</Text>
-            <Text style={styles.modalSubtitle}>Choose amount and payment method</Text>
-            
-            {/* Amount Input */}
-            <View style={styles.amountInputContainer}>
-              <Text style={styles.dollarSign}>$</Text>
-              <TextInput
-                style={styles.amountInput}
-                placeholder="0.00"
-                placeholderTextColor="#cbd5e1"
-                value={amount}
-                onChangeText={setAmount}
-                keyboardType="decimal-pad"
-              />
-            </View>
-
-            {/* Bonus Display */}
-            {bonusData && (
-              <View style={styles.bonusContainer}>
-                <View style={styles.bonusIcon}>
-                  <FontAwesomeIcon icon={faGift} size={16} color="#f59e0b" />
-                </View>
-                <View style={styles.bonusInfo}>
-                  <Text style={styles.bonusLabel}>
-                    {bonusData.bonus_percentage}% Bonus Applied! 🎉
-                  </Text>
-                  <Text style={styles.bonusAmount}>
-                    +${bonusData.bonus_amount.toFixed(2)} bonus • Total: ${bonusData.total_amount.toFixed(2)}
-                  </Text>
-                </View>
-              </View>
-            )}
-
-            {/* Quick Amounts */}
-            <View style={styles.quickAmountsContainer}>
-              {quickAmounts.map((quickAmount) => (
-                <TouchableOpacity
-                  key={quickAmount}
-                  style={[
-                    styles.quickAmountButton,
-                    amount === quickAmount && styles.activeQuickAmount,
-                  ]}
-                  activeOpacity={0.8}
-                  onPress={() => setAmount(quickAmount)}>
-                  {amount === quickAmount ? (
-                    <LinearGradient
-                      colors={['#800080', '#9933cc']}
-                      style={styles.quickAmountGradient}>
-                      <Text style={styles.activeQuickAmountText}>${quickAmount}</Text>
-                    </LinearGradient>
-                  ) : (
-                    <Text style={styles.quickAmountText}>${quickAmount}</Text>
-                  )}
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            {/* Payment Methods */}
-            <Text style={styles.paymentMethodsLabel}>Select Payment Method</Text>
-            <ScrollView style={styles.paymentMethodsScroll} showsVerticalScrollIndicator={false}>
-              {paymentMethods.map((method) => (
-                <TouchableOpacity
-                  key={method.id}
-                  style={[
-                    styles.paymentMethodButton,
-                    selectedMethod?.id === method.id && styles.activePaymentMethod,
-                  ]}
-                  activeOpacity={0.8}
-                  onPress={() => setSelectedMethod(method)}>
-                  <View style={styles.paymentMethodLeft}>
-                    <View style={[styles.paymentMethodIcon, { backgroundColor: method.color + '20' }]}>
-                      <FontAwesomeIcon icon={method.icon} size={22} color={method.color} />
-                    </View>
-                    <View style={styles.paymentMethodTextContainer}>
-                      <Text style={styles.paymentMethodName}>{method.name}</Text>
-                      <Text style={styles.paymentMethodDesc}>{method.description}</Text>
-                    </View>
-                  </View>
-                  {selectedMethod?.id === method.id && (
-                    <View style={styles.checkIconContainer}>
-                      <FontAwesomeIcon icon={faCheck} size={16} color="#800080" />
-                    </View>
-                  )}
-                </TouchableOpacity>
-              ))}
-            </ScrollView>
-
-            {/* Modal Actions */}
-            <View style={styles.modalActions}>
-              <TouchableOpacity
-                style={styles.modalCancelButton}
-                activeOpacity={0.8}
-                onPress={() => {
-                  setShowAddFundsModal(false);
-                  setAmount('');
-                  setSelectedMethod(null);
-                  setBonusData(null);
-                }}>
-                <Text style={styles.modalCancelText}>Cancel</Text>
-              </TouchableOpacity>
-              
-              <TouchableOpacity
-                style={styles.modalConfirmButton}
-                onPress={handleAddFunds}
-                disabled={processing || !amount || !selectedMethod}
-                activeOpacity={0.9}>
-                <LinearGradient
-                  colors={['#800080', '#9933cc', '#b84dff']}
-                  style={styles.modalConfirmGradient}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}>
-                  <View style={styles.modalConfirmGlow} />
-                  {processing ? (
-                    <ActivityIndicator color="#fff" size="small" />
-                  ) : (
-                    <>
-                      <Text style={styles.modalConfirmText}>Continue</Text>
-                      <FontAwesomeIcon icon={faPlus} size={16} color="#fff" />
-                    </>
-                  )}
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </Modal>
-
       <BottomNav navigate={navigate} currentScreen="Wallet" />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  webNoticeCard: {
+    flexDirection: 'row',
+    marginHorizontal: 20,
+    marginTop: 16,
+    padding: 16,
+    backgroundColor: '#faf5ff',
+    borderRadius: 16,
+    borderWidth: 1,
+    borderColor: '#e9d5ff',
+  },
+  webNoticeIcon: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: '#f3e8ff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+  },
+  webNoticeTextWrap: {
+    flex: 1,
+  },
+  webNoticeTitle: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#581c87',
+    marginBottom: 4,
+  },
+  webNoticeBody: {
+    fontSize: 12.5,
+    lineHeight: 18,
+    color: '#6b21a8',
+  },
+  webNoticeLink: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#800080',
+    marginTop: 8,
+    textDecorationLine: 'underline',
+  },
   container: {
     flex: 1,
     backgroundColor: '#f8fafc',

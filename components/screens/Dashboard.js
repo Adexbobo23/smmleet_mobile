@@ -451,7 +451,7 @@ const Dashboard = ({ navigate }) => {
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}>
               <FontAwesomeIcon icon={faPlus} size={14} color="#800080" />
-              <Text style={styles.addFundsText}>Add Funds</Text>
+              <Text style={styles.addFundsText}>View Wallet</Text>
             </LinearGradient>
           </TouchableOpacity>
         </View>
