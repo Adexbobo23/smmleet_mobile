@@ -947,7 +947,7 @@ const styles = StyleSheet.create({
   statMiniValue: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#f5f3ff',
+    color: '#040308',
     marginBottom: 2,
   },
   statMiniLabel: {
