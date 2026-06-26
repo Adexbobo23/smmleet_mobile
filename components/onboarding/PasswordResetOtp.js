@@ -220,10 +220,10 @@ const PasswordResetOtp = ({ navigate, route }) => {
                   activeOpacity={0.7}
                   style={styles.resendButton}>
                   {resending ? (
-                    <ActivityIndicator color="#800080" size="small" />
+                    <ActivityIndicator color="#da6bff" size="small" />
                   ) : (
                     <>
-                      <FontAwesomeIcon icon={faRotateRight} size={14} color="#800080" />
+                      <FontAwesomeIcon icon={faRotateRight} size={14} color="#da6bff" />
                       <Text style={styles.resendText}> Resend Code</Text>
                     </>
                   )}
@@ -275,7 +275,7 @@ const PasswordResetOtp = ({ navigate, route }) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
     marginTop: -25,
   },
   formCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 28,
     padding: 28,
     elevation: 6,
@@ -345,17 +345,17 @@ const styles = StyleSheet.create({
   titleName: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 12,
   },
   subtitle: {
     fontSize: 15,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
   },
   emailText: {
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: '600',
   },
   otpContainer: {
@@ -367,16 +367,16 @@ const styles = StyleSheet.create({
     width: 48,
     height: 58,
     borderWidth: 2,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     textAlign: 'center',
   },
   otpInputFilled: {
-    borderColor: '#800080',
+    borderColor: 'rgba(198,61,255,0.45)',
     backgroundColor: 'rgba(128, 0, 128, 0.05)',
   },
   resendContainer: {
@@ -390,16 +390,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   resendText: {
-    color: '#800080',
+    color: '#da6bff',
     fontSize: 15,
     fontWeight: '600',
   },
   countdownText: {
-    color: '#64748b',
+    color: '#a78bca',
     fontSize: 14,
   },
   countdownNumber: {
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: '600',
   },
   button: {
@@ -429,11 +429,11 @@ const styles = StyleSheet.create({
   infoContainer: {
     marginTop: 24,
     padding: 16,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 12,
   },
   infoText: {
-    color: '#64748b',
+    color: '#a78bca',
     fontSize: 13,
     textAlign: 'center',
     lineHeight: 20,
@@ -445,7 +445,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '500',
   },
 });

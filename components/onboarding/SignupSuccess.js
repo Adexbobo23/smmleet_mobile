@@ -67,10 +67,10 @@ const SignupSuccessful = ({ navigate }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" backgroundColor="#f5f5f5" />
+      <StatusBar style="light" backgroundColor="#07040d" />
       
       <LinearGradient
-        colors={['#f8f4ff', '#ffffff', '#f8f4ff']}
+        colors={['#140c24', '#0d0818', '#140c24']}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}>
@@ -179,19 +179,19 @@ const SignupSuccessful = ({ navigate }) => {
             <View style={styles.featuresContainer}>
               <View style={styles.featureItem}>
                 <View style={styles.checkCircle}>
-                  <FontAwesomeIcon icon={faCheckCircle} size={16} color="#800080" />
+                  <FontAwesomeIcon icon={faCheckCircle} size={16} color="#da6bff" />
                 </View>
                 <Text style={styles.featureText}>Access to all SMM services</Text>
               </View>
               <View style={styles.featureItem}>
                 <View style={styles.checkCircle}>
-                  <FontAwesomeIcon icon={faCheckCircle} size={16} color="#800080" />
+                  <FontAwesomeIcon icon={faCheckCircle} size={16} color="#da6bff" />
                 </View>
                 <Text style={styles.featureText}>Secure payment options</Text>
               </View>
               <View style={styles.featureItem}>
                 <View style={styles.checkCircle}>
-                  <FontAwesomeIcon icon={faCheckCircle} size={16} color="#800080" />
+                  <FontAwesomeIcon icon={faCheckCircle} size={16} color="#da6bff" />
                 </View>
                 <Text style={styles.featureText}>24/7 customer support</Text>
               </View>
@@ -206,7 +206,7 @@ const SignupSuccessful = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0d0818',
   },
   gradient: {
     flex: 1,
@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 80,
     borderWidth: 3,
-    borderColor: '#800080',
+    borderColor: 'rgba(198,61,255,0.45)',
     top: 0,
     left: 0,
     zIndex: 2,
@@ -264,7 +264,7 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 80,
     borderWidth: 2,
-    borderColor: '#9933cc',
+    borderColor: 'rgba(198,61,255,0.35)',
     top: 0,
     left: 0,
     zIndex: 1,
@@ -277,13 +277,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#ede9fe',
     marginBottom: 12,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 15,
-    color: '#666',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
     paddingHorizontal: 10,
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
   },
   featuresContainer: {
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 15,
     padding: 20,
     elevation: 3,
@@ -338,14 +338,14 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#f8f4ff',
+    backgroundColor: '#140c24',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 12,
   },
   featureText: {
     fontSize: 15,
-    color: '#333',
+    color: '#ede9fe',
     flex: 1,
   },
 });

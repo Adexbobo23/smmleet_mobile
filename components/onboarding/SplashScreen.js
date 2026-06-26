@@ -180,9 +180,9 @@ const SplashScreen = ({ navigate }) => {
   if (isCheckingAuth) {
     return (
       <View style={styles.loadingContainer}>
-        <StatusBar style="dark" backgroundColor="#fff" />
+        <StatusBar style="light" backgroundColor="#07040d" />
         <LinearGradient
-          colors={['#ffffff', '#f8f4ff', '#ffffff']}
+          colors={['#140c24', '#0d0818', '#140c24']}
           style={styles.loadingGradient}>
           <Animated.View
             style={[
@@ -198,7 +198,7 @@ const SplashScreen = ({ navigate }) => {
               resizeMode="contain"
             />
             <View style={styles.loadingIndicatorContainer}>
-              <ActivityIndicator size="large" color="#800080" />
+              <ActivityIndicator size="large" color="#da6bff" />
               <Text style={styles.loadingText}>Loading...</Text>
             </View>
           </Animated.View>
@@ -209,10 +209,10 @@ const SplashScreen = ({ navigate }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" backgroundColor="#fff" />
+      <StatusBar style="light" backgroundColor="#07040d" />
       
       <LinearGradient
-        colors={['#ffffff', '#f8f4ff', '#ffffff']}
+        colors={['#140c24', '#0d0818', '#140c24']}
         style={styles.gradient}>
         
         <View style={styles.logoContainer}>
@@ -320,7 +320,7 @@ const SplashScreen = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
   },
   gradient: {
     flex: 1,
@@ -328,7 +328,7 @@ const styles = StyleSheet.create({
   // Loading screen styles
   loadingContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
   },
   loadingGradient: {
     flex: 1,
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 15,
     fontSize: 16,
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: '500',
   },
   // Main screen styles
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
   },
   slideImage: {
     width: '100%',
@@ -410,13 +410,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#ede9fe',
     marginBottom: 12,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 15,
-    color: '#666',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
     paddingHorizontal: 10,
@@ -481,7 +481,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   skipText: {
-    color: '#800080',
+    color: '#da6bff',
     fontSize: 16,
     fontWeight: '600',
   },

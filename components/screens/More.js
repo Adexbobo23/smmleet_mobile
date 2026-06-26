@@ -197,7 +197,7 @@ const More = ({ navigate }) => {
           name: 'SMS Activation', 
           icon: faMobileAlt, 
           screen: 'SMSActivation', 
-          color: '#800080',
+          color: '#da6bff',
           description: 'Get verification codes instantly'
         },
         { 
@@ -250,7 +250,7 @@ const More = ({ navigate }) => {
           name: 'Profile Settings', 
           icon: faUser, 
           screen: 'Profile', 
-          color: '#800080',
+          color: '#da6bff',
           description: 'Manage your profile'
         },
         { 
@@ -295,25 +295,25 @@ const More = ({ navigate }) => {
         },
       ],
     },
-    {
-      title: 'Resources',
-      items: [
-        { 
-          name: 'How To Use', 
-          icon: faBookOpen, 
-          screen: null, 
-          color: '#0ea5e9',
-          description: 'Learn how to use the app'
-        },
-        { 
-          name: 'Terms & Conditions', 
-          icon: faFileContract, 
-          screen: null, 
-          color: '#64748b',
-          description: 'Read our terms'
-        },
-      ],
-    },
+    // {
+    //   title: 'Resources',
+    //   items: [
+    //     { 
+    //       name: 'How To Use', 
+    //       icon: faBookOpen, 
+    //       screen: null, 
+    //       color: '#0ea5e9',
+    //       description: 'Learn how to use the app'
+    //     },
+    //     { 
+    //       name: 'Terms & Conditions', 
+    //       icon: faFileContract, 
+    //       screen: null, 
+    //       color: '#a78bca',
+    //       description: 'Read our terms'
+    //     },
+    //   ],
+    // },
   ];
 
   if (loading) {
@@ -379,7 +379,7 @@ const More = ({ navigate }) => {
             onPress={() => navigate('Profile')}
             activeOpacity={0.9}>
             <LinearGradient
-              colors={['#ffffff', '#fafbff']}
+              colors={['#140c24', '#0d0818']}
               style={styles.userCardGradient}
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}>
@@ -408,15 +408,15 @@ const More = ({ navigate }) => {
                 <TouchableOpacity 
                   style={styles.editButton}
                   onPress={() => navigate('Profile')}>
-                  <FontAwesomeIcon icon={faEdit} size={14} color="#800080" />
+                  <FontAwesomeIcon icon={faEdit} size={14} color="#da6bff" />
                 </TouchableOpacity>
               </View>
 
               {/* Stats Row */}
               <View style={styles.statsRow}>
                 <View style={styles.statItem}>
-                  <View style={[styles.statIcon, { backgroundColor: '#f3e8ff' }]}>
-                    <FontAwesomeIcon icon={faWallet} size={16} color="#800080" />
+                  <View style={[styles.statIcon, { backgroundColor: '#140c24' }]}>
+                    <FontAwesomeIcon icon={faWallet} size={16} color="#da6bff" />
                   </View>
                   <Text style={styles.statValue}>${walletBalance.toFixed(2)}</Text>
                   <Text style={styles.statLabel}>Balance</Text>
@@ -561,7 +561,7 @@ const More = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -678,7 +678,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
-    borderColor: '#fff',
+    borderColor: 'rgba(255,255,255,0.10)',
     overflow: 'hidden',
   },
   avatarGlow: {
@@ -702,11 +702,11 @@ const styles = StyleSheet.create({
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: '#fff',
+    borderColor: 'rgba(255,255,255,0.10)',
     elevation: 2,
     shadowColor: '#fbbf24',
     shadowOffset: { width: 0, height: 1 },
@@ -719,31 +719,31 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 4,
     letterSpacing: 0.3,
   },
   userEmail: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '500',
   },
   editButton: {
     width: 38,
     height: 38,
     borderRadius: 12,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#e9d5ff',
+    borderColor: 'rgba(198,61,255,0.25)',
   },
   statsRow: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     paddingTop: 20,
     borderTopWidth: 1,
-    borderTopColor: '#f1f5f9',
+    borderTopColor: 'rgba(255,255,255,0.06)',
   },
   statItem: {
     alignItems: 'center',
@@ -760,18 +760,18 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 2,
   },
   statLabel: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   statDivider: {
     width: 1,
     height: 40,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
     alignSelf: 'center',
   },
   menuSection: {
@@ -793,7 +793,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 13,
     fontWeight: 'bold',
-    color: '#475569',
+    color: '#cbb9e6',
     letterSpacing: 0.5,
     textTransform: 'uppercase',
   },
@@ -811,7 +811,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   menuCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 18,
     overflow: 'hidden',
     elevation: 2,
@@ -820,7 +820,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 4,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   menuItem: {
     flexDirection: 'row',
@@ -831,7 +831,7 @@ const styles = StyleSheet.create({
   },
   menuItemBorder: {
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   menuItemLeft: {
     flexDirection: 'row',
@@ -857,12 +857,12 @@ const styles = StyleSheet.create({
   menuItemText: {
     fontSize: 15,
     fontWeight: '600',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 2,
   },
   menuItemDescription: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '500',
   },
   menuItemRight: {
@@ -913,7 +913,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   dangerCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 18,
     overflow: 'hidden',
     elevation: 2,
@@ -984,7 +984,7 @@ const styles = StyleSheet.create({
   },
   versionText: {
     fontSize: 12,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '600',
     marginBottom: 4,
   },

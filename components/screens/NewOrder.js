@@ -349,16 +349,16 @@ const NewOrder = ({ navigate }) => {
         {/* Order Form Card */}
         <View style={styles.orderCard}>
           <LinearGradient
-            colors={['#fafbff', '#ffffff']}
+            colors={['#0d0818', '#140c24']}
             style={styles.cardHeader}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}>
             <View style={styles.cardHeaderContent}>
               <View style={styles.cardHeaderIcon}>
                 <LinearGradient
-                  colors={['#f3e8ff', '#faf5ff']}
+                  colors={['#1c1232', '#140c24']}
                   style={styles.cardHeaderIconGradient}>
-                  <FontAwesomeIcon icon={faPlus} size={16} color="#800080" />
+                  <FontAwesomeIcon icon={faPlus} size={16} color="#da6bff" />
                 </LinearGradient>
               </View>
               <View style={styles.cardHeaderTitles}>
@@ -370,7 +370,7 @@ const NewOrder = ({ navigate }) => {
                   style={styles.clearBtn}
                   onPress={clearOrder}
                   activeOpacity={0.7}>
-                  <FontAwesomeIcon icon={faTimes} size={14} color="#64748b" />
+                  <FontAwesomeIcon icon={faTimes} size={14} color="#a78bca" />
                 </TouchableOpacity>
               )}
             </View>
@@ -389,7 +389,7 @@ const NewOrder = ({ navigate }) => {
                     {selectedCategory ? selectedCategory.name : 'Select Category'}
                   </Text>
                   <View style={styles.selectIconWrapper}>
-                    <FontAwesomeIcon icon={faChevronDown} size={12} color="#800080" />
+                    <FontAwesomeIcon icon={faChevronDown} size={12} color="#da6bff" />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -417,13 +417,13 @@ const NewOrder = ({ navigate }) => {
                   }
                 }}>
                 <View style={styles.selectContent}>
-                  <Text style={[styles.selectButtonText, !selectedService && { color: '#94a3b8' }]} numberOfLines={1}>
+                  <Text style={[styles.selectButtonText, !selectedService && { color: '#8a76a8' }]} numberOfLines={1}>
                     {selectedService 
                       ? `${selectedService.service_id || selectedService.id} - ${selectedService.name}` 
                       : services.length > 0 ? 'Select a service...' : 'No services available'}
                   </Text>
                   <View style={styles.selectIconWrapper}>
-                    <FontAwesomeIcon icon={faChevronDown} size={12} color="#800080" />
+                    <FontAwesomeIcon icon={faChevronDown} size={12} color="#da6bff" />
                   </View>
                 </View>
               </TouchableOpacity>
@@ -443,13 +443,13 @@ const NewOrder = ({ navigate }) => {
               <Text style={styles.inputLabel}>LINK</Text>
               <View style={styles.inputContainer}>
                 <View style={styles.inputIconWrapper}>
-                  <FontAwesomeIcon icon={faLink} size={16} color="#94a3b8" />
+                  <FontAwesomeIcon icon={faLink} size={16} color="#8a76a8" />
                 </View>
                 <TextInput
                   ref={linkRef}
                   style={styles.textInput}
                   placeholder="https://..."
-                  placeholderTextColor="#cbd5e1"
+                  placeholderTextColor="#6b5b85"
                   value={link}
                   onChangeText={setLink}
                   autoCapitalize="none"
@@ -483,7 +483,7 @@ const NewOrder = ({ navigate }) => {
               <View style={[styles.inputGroup, styles.halfWidth]}>
                 <Text style={styles.inputLabel}>TOTAL CHARGE</Text>
                 <LinearGradient
-                  colors={['#faf5ff', '#ffffff']}
+                  colors={['#140c24', '#0d0818']}
                   style={styles.totalContainer}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 0, y: 1 }}>
@@ -520,7 +520,7 @@ const NewOrder = ({ navigate }) => {
         {/* Info Card */}
         <View style={styles.infoCard}>
           <LinearGradient
-            colors={['#eff6ff', '#ffffff']}
+            colors={['#0d1426', '#0d0818']}
             style={styles.infoGradient}>
             <View style={styles.infoIcon}>
               <FontAwesomeIcon icon={faInfoCircle} size={20} color="#3b82f6" />
@@ -553,7 +553,7 @@ const NewOrder = ({ navigate }) => {
               <TouchableOpacity 
                 onPress={() => setShowCategoryModal(false)}
                 style={styles.modalCloseBtn}>
-                <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
               </TouchableOpacity>
             </View>
             
@@ -604,7 +604,7 @@ const NewOrder = ({ navigate }) => {
               <TouchableOpacity 
                 onPress={() => setShowServiceModal(false)}
                 style={styles.modalCloseBtn}>
-                <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
               </TouchableOpacity>
             </View>
             
@@ -751,7 +751,7 @@ const NewOrder = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -815,12 +815,12 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   orderCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 22,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     overflow: 'hidden',
     elevation: 3,
     shadowColor: '#000',
@@ -831,7 +831,7 @@ const styles = StyleSheet.create({
   cardHeader: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   cardHeaderContent: {
     flexDirection: 'row',
@@ -856,11 +856,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 19,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   cardSubtitle: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     marginTop: 3,
     fontWeight: '500',
   },
@@ -868,7 +868,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -881,14 +881,14 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 10,
     letterSpacing: 0.8,
   },
   selectButton: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     overflow: 'hidden',
   },
@@ -900,7 +900,7 @@ const styles = StyleSheet.create({
   },
   selectButtonText: {
     fontSize: 14,
-    color: '#334155',
+    color: '#e9ddff',
     fontWeight: '600',
     flex: 1,
   },
@@ -908,14 +908,14 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 8,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 10,
   },
   serviceDescContainer: {
     flexDirection: 'row',
-    backgroundColor: '#eff6ff',
+    backgroundColor: '#140c24',
     borderWidth: 1.5,
     borderColor: '#dbeafe',
     borderRadius: 14,
@@ -941,9 +941,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 54,
@@ -952,7 +952,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -960,7 +960,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '500',
   },
   rowInputs: {
@@ -973,9 +973,9 @@ const styles = StyleSheet.create({
   quantityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 54,
@@ -983,25 +983,25 @@ const styles = StyleSheet.create({
   quantityInput: {
     flex: 1,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '600',
   },
   minMaxBadge: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 8,
   },
   minMaxText: {
     fontSize: 10,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '700',
   },
   totalContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#f3e8ff',
+    borderColor: 'rgba(198,61,255,0.18)',
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 54,
@@ -1009,13 +1009,13 @@ const styles = StyleSheet.create({
   dollarSign: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     marginRight: 6,
   },
   totalAmount: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
   },
   submitButton: {
     borderRadius: 14,
@@ -1040,7 +1040,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   infoCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 18,
@@ -1070,12 +1070,12 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 8,
   },
   infoText: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     lineHeight: 20,
     fontWeight: '500',
   },
@@ -1085,7 +1085,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     maxHeight: screenHeight * 0.7,
@@ -1097,18 +1097,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   modalCloseBtn: {
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1121,27 +1121,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 16,
     borderRadius: 14,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     marginBottom: 10,
     borderWidth: 2,
     borderColor: 'transparent',
   },
   modalItemSelected: {
-    backgroundColor: '#f3e8ff',
-    borderColor: '#800080',
+    backgroundColor: '#140c24',
+    borderColor: 'rgba(198,61,255,0.45)',
   },
   modalItemText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#334155',
+    color: '#e9ddff',
     flex: 1,
   },
   modalItemTextSelected: {
-    color: '#800080',
+    color: '#da6bff',
   },
   modalItemCount: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginRight: 10,
   },
   modalCheckIcon: {
@@ -1157,7 +1157,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   serviceModalRate: {
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 8,
@@ -1166,7 +1166,7 @@ const styles = StyleSheet.create({
   },
   serviceRateText: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '700',
   },
   bottomSpacer: {
@@ -1181,7 +1181,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   resultModalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 28,
     padding: 32,
     width: '100%',
@@ -1216,20 +1216,20 @@ const styles = StyleSheet.create({
   },
   resultMessage: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
     marginBottom: 24,
     fontWeight: '500',
   },
   orderDetailsContainer: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 16,
     padding: 20,
     width: '100%',
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   orderDetailRow: {
     flexDirection: 'row',
@@ -1238,18 +1238,18 @@ const styles = StyleSheet.create({
   },
   orderDetailLabel: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   orderDetailValue: {
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '700',
     fontFamily: 'monospace',
   },
   orderDetailValueHighlight: {
     fontSize: 18,
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: 'bold',
   },
   orderDetailDivider: {
@@ -1266,14 +1266,14 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 14,
     borderWidth: 2,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     paddingVertical: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   resultSecondaryBtnText: {
-    color: '#64748b',
+    color: '#a78bca',
     fontSize: 14,
     fontWeight: 'bold',
   },

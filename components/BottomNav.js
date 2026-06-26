@@ -21,18 +21,17 @@ const BottomNav = ({ navigate, currentScreen }) => {
 
   return (
     <View style={styles.container}>
-      {/* Floating shadow effect */}
       <View style={styles.shadowLayer} />
-      
+
       <LinearGradient
-        colors={['#ffffff', '#faf8ff']}
+        colors={['#140c24', '#0d0818']}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}>
-        
-        {/* Decorative top border with gradient */}
+
+        {/* Neon top hairline */}
         <LinearGradient
-          colors={['#e9d5ff', '#f3e8ff', '#ffffff']}
+          colors={['#8b008b', '#c63dff', '#22d3ee']}
           style={styles.topBorder}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
@@ -50,22 +49,20 @@ const BottomNav = ({ navigate, currentScreen }) => {
                 {isActive ? (
                   <View style={styles.activeContainer}>
                     <LinearGradient
-                      colors={['#800080', '#9933cc']}
+                      colors={['#8b008b', '#c63dff']}
                       style={styles.activeButton}
                       start={{ x: 0, y: 0 }}
                       end={{ x: 1, y: 1 }}>
-                      {/* Glow effect inside button */}
                       <View style={styles.glowEffect} />
                       <FontAwesomeIcon icon={item.icon} size={22} color="#fff" />
                     </LinearGradient>
                     <Text style={styles.activeText}>{item.name}</Text>
-                    {/* Active indicator dot */}
                     <View style={styles.activeDot} />
                   </View>
                 ) : (
                   <View style={styles.inactiveContainer}>
                     <View style={styles.inactiveButton}>
-                      <FontAwesomeIcon icon={item.icon} size={20} color="#94a3b8" />
+                      <FontAwesomeIcon icon={item.icon} size={20} color="#8a76a8" />
                     </View>
                     <Text style={styles.inactiveText}>{item.name}</Text>
                   </View>
@@ -80,105 +77,37 @@ const BottomNav = ({ navigate, currentScreen }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
+  container: { position: 'absolute', bottom: 0, left: 0, right: 0 },
   shadowLayer: {
-    position: 'absolute',
-    top: -20,
-    left: 0,
-    right: 0,
-    height: 20,
-    backgroundColor: 'transparent',
-    shadowColor: '#800080',
-    shadowOffset: { width: 0, height: -8 },
-    shadowOpacity: 0.15,
-    shadowRadius: 16,
-    elevation: 24,
+    position: 'absolute', top: -20, left: 0, right: 0, height: 20,
+    backgroundColor: 'transparent', shadowColor: '#c63dff',
+    shadowOffset: { width: 0, height: -8 }, shadowOpacity: 0.35, shadowRadius: 16, elevation: 24,
   },
   gradient: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    overflow: 'hidden',
-    paddingBottom: 8,
+    borderTopLeftRadius: 24, borderTopRightRadius: 24, overflow: 'hidden', paddingBottom: 8,
+    borderTopWidth: 1, borderColor: 'rgba(198,61,255,0.18)',
   },
-  topBorder: {
-    height: 3,
-    width: '100%',
-  },
-  navContent: {
-    flexDirection: 'row',
-    paddingTop: 12,
-    paddingHorizontal: 8,
-    paddingBottom: 4,
-    marginBottom: 30, 
-  },
-  navItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  activeContainer: {
-    alignItems: 'center',
-    position: 'relative',
-  },
+  topBorder: { height: 3, width: '100%' },
+  navContent: { flexDirection: 'row', paddingTop: 12, paddingHorizontal: 8, paddingBottom: 4, marginBottom: 30 },
+  navItem: { flex: 1, alignItems: 'center' },
+  activeContainer: { alignItems: 'center', position: 'relative' },
   activeButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-    elevation: 8,
-    shadowColor: '#800080',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    overflow: 'hidden',
-    position: 'relative',
+    width: 56, height: 56, borderRadius: 16, alignItems: 'center', justifyContent: 'center',
+    elevation: 8, shadowColor: '#c63dff', shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.6, shadowRadius: 10, overflow: 'hidden', position: 'relative',
   },
   glowEffect: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '50%',
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    borderRadius: 16,
+    position: 'absolute', top: 0, left: 0, right: 0, height: '50%',
+    backgroundColor: 'rgba(255,255,255,0.18)', borderRadius: 16,
   },
-  activeText: {
-    color: '#800080',
-    fontSize: 11,
-    fontWeight: 'bold',
-    marginTop: 6,
-    letterSpacing: 0.3,
-  },
-  activeDot: {
-    width: 4,
-    height: 4,
-    borderRadius: 2,
-    backgroundColor: '#800080',
-    marginTop: 4,
-  },
-  inactiveContainer: {
-    alignItems: 'center',
-  },
+  activeText: { color: '#da6bff', fontSize: 11, fontWeight: 'bold', marginTop: 6, letterSpacing: 0.3 },
+  activeDot: { width: 4, height: 4, borderRadius: 2, backgroundColor: '#22d3ee', marginTop: 4 },
+  inactiveContainer: { alignItems: 'center' },
   inactiveButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(148, 163, 184, 0.08)',
+    width: 48, height: 48, borderRadius: 12, alignItems: 'center', justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.04)',
   },
-  inactiveText: {
-    color: '#64748b',
-    fontSize: 11,
-    fontWeight: '600',
-    marginTop: 6,
-    letterSpacing: 0.2,
-  },
+  inactiveText: { color: '#8a76a8', fontSize: 11, fontWeight: '600', marginTop: 6, letterSpacing: 0.2 },
 });
 
 export default BottomNav;

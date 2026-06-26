@@ -220,12 +220,12 @@ const Profile = ({ navigate }) => {
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>USERNAME</Text>
             <View style={[styles.inputContainer, styles.inputDisabled]}>
-              <FontAwesomeIcon icon={faUser} size={16} color="#94a3b8" style={styles.inputIcon} />
+              <FontAwesomeIcon icon={faUser} size={16} color="#8a76a8" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 value={profile.username}
                 editable={false}
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
               />
             </View>
             <Text style={styles.inputHint}>Username cannot be changed</Text>
@@ -235,12 +235,12 @@ const Profile = ({ navigate }) => {
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>EMAIL ADDRESS</Text>
             <View style={[styles.inputContainer, styles.inputDisabled]}>
-              <FontAwesomeIcon icon={faEnvelope} size={16} color="#94a3b8" style={styles.inputIcon} />
+              <FontAwesomeIcon icon={faEnvelope} size={16} color="#8a76a8" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 value={profile.email}
                 editable={false}
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
               />
             </View>
             <Text style={styles.inputHint}>Email cannot be changed</Text>
@@ -250,11 +250,11 @@ const Profile = ({ navigate }) => {
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>FIRST NAME</Text>
             <View style={styles.inputContainer}>
-              <FontAwesomeIcon icon={faUser} size={16} color="#800080" style={styles.inputIcon} />
+              <FontAwesomeIcon icon={faUser} size={16} color="#da6bff" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Enter your first name"
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={profile.first_name}
                 onChangeText={(text) => setProfile({ ...profile, first_name: text })}
                 autoCapitalize="words"
@@ -266,11 +266,11 @@ const Profile = ({ navigate }) => {
           <View style={styles.inputGroup}>
             <Text style={styles.inputLabel}>LAST NAME</Text>
             <View style={styles.inputContainer}>
-              <FontAwesomeIcon icon={faUser} size={16} color="#800080" style={styles.inputIcon} />
+              <FontAwesomeIcon icon={faUser} size={16} color="#da6bff" style={styles.inputIcon} />
               <TextInput
                 style={styles.input}
                 placeholder="Enter your last name"
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={profile.last_name}
                 onChangeText={(text) => setProfile({ ...profile, last_name: text })}
                 autoCapitalize="words"
@@ -316,7 +316,7 @@ const Profile = ({ navigate }) => {
               <TextInput
                 style={styles.input}
                 placeholder="Enter current password"
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={passwords.old_password}
                 onChangeText={(text) => setPasswords({ ...passwords, old_password: text })}
                 secureTextEntry
@@ -333,7 +333,7 @@ const Profile = ({ navigate }) => {
               <TextInput
                 style={styles.input}
                 placeholder="Enter new password (min 6 characters)"
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={passwords.new_password}
                 onChangeText={(text) => setPasswords({ ...passwords, new_password: text })}
                 secureTextEntry
@@ -351,7 +351,7 @@ const Profile = ({ navigate }) => {
               <TextInput
                 style={styles.input}
                 placeholder="Re-enter new password"
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={passwords.confirm_password}
                 onChangeText={(text) => setPasswords({ ...passwords, confirm_password: text })}
                 secureTextEntry
@@ -403,7 +403,7 @@ const Profile = ({ navigate }) => {
         <View style={styles.securityNotice}>
           <View style={styles.noticeCard}>
             <View style={styles.noticeIcon}>
-              <FontAwesomeIcon icon={faLock} size={18} color="#800080" />
+              <FontAwesomeIcon icon={faLock} size={18} color="#da6bff" />
             </View>
             <View style={styles.noticeContent}>
               <Text style={styles.noticeTitle}>Security Tips</Text>
@@ -425,7 +425,7 @@ const Profile = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: { 
     flex: 1, 
-    backgroundColor: '#f8fafc' 
+    backgroundColor: '#07040d' 
   },
   centerContent: { 
     justifyContent: 'center', 
@@ -500,13 +500,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   section: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 20,
     padding: 24,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -528,7 +528,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     letterSpacing: 0.8,
   },
   inputGroup: { 
@@ -537,23 +537,23 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 10,
     letterSpacing: 0.8,
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 54,
   },
   inputDisabled: { 
     opacity: 0.6,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
   },
   inputIcon: { 
     marginRight: 12 
@@ -561,12 +561,12 @@ const styles = StyleSheet.create({
   input: { 
     flex: 1, 
     fontSize: 14, 
-    color: '#1e293b', 
+    color: '#f5f3ff', 
     fontWeight: '500' 
   },
   inputHint: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginTop: 6,
     fontWeight: '500',
   },
@@ -602,18 +602,18 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   noticeCard: {
-    backgroundColor: '#faf5ff',
+    backgroundColor: '#140c24',
     borderRadius: 16,
     padding: 20,
     flexDirection: 'row',
     borderWidth: 1.5,
-    borderColor: '#e9d5ff',
+    borderColor: 'rgba(198,61,255,0.25)',
   },
   noticeIcon: {
     width: 44,
     height: 44,
     borderRadius: 12,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 14,
@@ -624,12 +624,12 @@ const styles = StyleSheet.create({
   noticeTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     marginBottom: 8,
   },
   noticeText: {
     fontSize: 12,
-    color: '#6b21a8',
+    color: '#e89bff',
     lineHeight: 18,
     fontWeight: '500',
   },

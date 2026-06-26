@@ -287,18 +287,18 @@ const Orders = ({ navigate }) => {
         
         <View style={styles.searchContainer}>
           <View style={styles.searchIconWrapper}>
-            <FontAwesomeIcon icon={faSearch} size={16} color="#800080" />
+            <FontAwesomeIcon icon={faSearch} size={16} color="#da6bff" />
           </View>
           <TextInput
             style={styles.searchInput}
             placeholder="Search by ID or service..."
-            placeholderTextColor="#94a3b8"
+            placeholderTextColor="#6b5b85"
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={() => setSearchQuery('')} style={styles.clearButton}>
-              <FontAwesomeIcon icon={faTimes} size={14} color="#94a3b8" />
+              <FontAwesomeIcon icon={faTimes} size={14} color="#8a76a8" />
             </TouchableOpacity>
           )}
         </View>
@@ -346,7 +346,7 @@ const Orders = ({ navigate }) => {
       {/* Filter Tabs */}
       <View style={styles.filterContainer}>
         <LinearGradient
-          colors={['#ffffff', '#fafbff']}
+          colors={['#140c24', '#0d0818']}
           style={styles.filterGradientBg}
           start={{ x: 0, y: 0 }}
           end={{ x: 0, y: 1 }}>
@@ -395,9 +395,9 @@ const Orders = ({ navigate }) => {
           <View style={styles.emptyState}>
             <View style={styles.emptyIconContainer}>
               <LinearGradient
-                colors={['#f3e8ff', '#faf5ff']}
+                colors={['#1c1232', '#140c24']}
                 style={styles.emptyIconGradient}>
-                <FontAwesomeIcon icon={faStar} size={40} color="#800080" />
+                <FontAwesomeIcon icon={faStar} size={40} color="#da6bff" />
               </LinearGradient>
             </View>
             <Text style={styles.emptyTitle}>No orders found</Text>
@@ -434,14 +434,14 @@ const Orders = ({ navigate }) => {
                   <View style={styles.orderIdSection}>
                     <View style={styles.orderIconBadge}>
                       <LinearGradient
-                        colors={['#f3e8ff', '#faf5ff']}
+                        colors={['#1c1232', '#140c24']}
                         style={styles.orderIconGradient}>
-                        <FontAwesomeIcon icon={faShoppingBag} size={14} color="#800080" />
+                        <FontAwesomeIcon icon={faShoppingBag} size={14} color="#da6bff" />
                       </LinearGradient>
                     </View>
                     <View>
                       <View style={styles.orderIdBadge}>
-                        <FontAwesomeIcon icon={faHashtag} size={8} color="#64748b" />
+                        <FontAwesomeIcon icon={faHashtag} size={8} color="#a78bca" />
                         <Text style={styles.orderId}>{order.order_id || order.id}</Text>
                       </View>
                       <View
@@ -463,9 +463,9 @@ const Orders = ({ navigate }) => {
                   
                   <View style={styles.chargeContainer}>
                     <LinearGradient
-                      colors={['#f3e8ff', '#faf5ff']}
+                      colors={['#1c1232', '#140c24']}
                       style={styles.chargeGradient}>
-                      <FontAwesomeIcon icon={faDollarSign} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faDollarSign} size={12} color="#da6bff" />
                       <Text style={styles.orderCharge}>
                         {parseFloat(order.charge || 0).toFixed(2)}
                       </Text>
@@ -476,7 +476,7 @@ const Orders = ({ navigate }) => {
                 {/* Service Name */}
                 <View style={styles.serviceSection}>
                   <View style={styles.serviceIconWrapper}>
-                    <FontAwesomeIcon icon={faChartLine} size={12} color="#800080" />
+                    <FontAwesomeIcon icon={faChartLine} size={12} color="#da6bff" />
                   </View>
                   <Text style={styles.orderService} numberOfLines={2}>
                     {order.service_name || order.service || 'Service'}
@@ -517,13 +517,13 @@ const Orders = ({ navigate }) => {
 
                 {/* Order Details */}
                 <LinearGradient
-                  colors={['#fafbff', '#ffffff']}
+                  colors={['#0d0818', '#140c24']}
                   style={styles.orderDetails}
                   start={{ x: 0, y: 0 }}
                   end={{ x: 1, y: 0 }}>
                   <View style={styles.detailItem}>
                     <View style={styles.detailIconWrapper}>
-                      <FontAwesomeIcon icon={faCubes} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faCubes} size={12} color="#da6bff" />
                     </View>
                     <Text style={styles.detailLabel}>Quantity</Text>
                     <Text style={styles.detailValue}>{order.quantity || 0}</Text>
@@ -568,9 +568,9 @@ const Orders = ({ navigate }) => {
                     activeOpacity={0.8}
                     onPress={() => showOrderDetails(order)}>
                     <LinearGradient
-                      colors={['#f3e8ff', '#faf5ff']}
+                      colors={['#1c1232', '#140c24']}
                       style={styles.viewButtonGradient}>
-                      <FontAwesomeIcon icon={faEye} size={13} color="#800080" />
+                      <FontAwesomeIcon icon={faEye} size={13} color="#da6bff" />
                       <Text style={styles.viewButtonText}>Details</Text>
                     </LinearGradient>
                   </TouchableOpacity>
@@ -651,16 +651,16 @@ const Orders = ({ navigate }) => {
                 <View style={styles.detailModalHeader}>
                   <View style={styles.detailModalIcon}>
                     <LinearGradient
-                      colors={['#f3e8ff', '#faf5ff']}
+                      colors={['#1c1232', '#140c24']}
                       style={styles.detailModalIconGradient}>
-                      <FontAwesomeIcon icon={faInfoCircle} size={20} color="#800080" />
+                      <FontAwesomeIcon icon={faInfoCircle} size={20} color="#da6bff" />
                     </LinearGradient>
                   </View>
                   <Text style={styles.detailModalTitle}>Order Details</Text>
                   <TouchableOpacity 
                     onPress={() => setOrderDetailModal({ visible: false, order: null })}
                     style={styles.detailModalCloseBtn}>
-                    <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                    <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
                   </TouchableOpacity>
                 </View>
 
@@ -669,7 +669,7 @@ const Orders = ({ navigate }) => {
                   {/* Order ID & Status */}
                   <View style={styles.detailModalRow}>
                     <View style={styles.detailModalLabelContainer}>
-                      <FontAwesomeIcon icon={faHashtag} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faHashtag} size={12} color="#da6bff" />
                       <Text style={styles.detailModalLabel}>Order ID</Text>
                     </View>
                     <Text style={styles.detailModalValue}>
@@ -681,7 +681,7 @@ const Orders = ({ navigate }) => {
 
                   <View style={styles.detailModalRow}>
                     <View style={styles.detailModalLabelContainer}>
-                      <FontAwesomeIcon icon={faChartLine} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faChartLine} size={12} color="#da6bff" />
                       <Text style={styles.detailModalLabel}>Service</Text>
                     </View>
                     <Text style={styles.detailModalValueSmall} numberOfLines={2}>
@@ -720,7 +720,7 @@ const Orders = ({ navigate }) => {
 
                   <View style={styles.detailModalRow}>
                     <View style={styles.detailModalLabelContainer}>
-                      <FontAwesomeIcon icon={faCubes} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faCubes} size={12} color="#da6bff" />
                       <Text style={styles.detailModalLabel}>Quantity</Text>
                     </View>
                     <Text style={styles.detailModalValue}>
@@ -732,7 +732,7 @@ const Orders = ({ navigate }) => {
 
                   <View style={styles.detailModalRow}>
                     <View style={styles.detailModalLabelContainer}>
-                      <FontAwesomeIcon icon={faDollarSign} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faDollarSign} size={12} color="#da6bff" />
                       <Text style={styles.detailModalLabel}>Charge</Text>
                     </View>
                     <Text style={styles.detailModalValueHighlight}>
@@ -744,7 +744,7 @@ const Orders = ({ navigate }) => {
 
                   <View style={styles.detailModalRow}>
                     <View style={styles.detailModalLabelContainer}>
-                      <FontAwesomeIcon icon={faLink} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faLink} size={12} color="#da6bff" />
                       <Text style={styles.detailModalLabel}>Link</Text>
                     </View>
                     <Text style={styles.detailModalValueSmall} numberOfLines={2}>
@@ -783,7 +783,7 @@ const Orders = ({ navigate }) => {
 
                   <View style={styles.detailModalRow}>
                     <View style={styles.detailModalLabelContainer}>
-                      <FontAwesomeIcon icon={faCalendarAlt} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faCalendarAlt} size={12} color="#da6bff" />
                       <Text style={styles.detailModalLabel}>Created</Text>
                     </View>
                     <Text style={styles.detailModalValue}>
@@ -819,7 +819,7 @@ const Orders = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -881,7 +881,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 14,
     paddingHorizontal: 16,
     height: 50,
@@ -895,7 +895,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 10,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -903,14 +903,14 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '500',
   },
   clearButton: {
     width: 28,
     height: 28,
     borderRadius: 8,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -947,13 +947,13 @@ const styles = StyleSheet.create({
   statMiniValue: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 2,
   },
   statMiniLabel: {
     fontSize: 10,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -963,7 +963,7 @@ const styles = StyleSheet.create({
   filterGradientBg: {
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   filterScroll: {
     paddingHorizontal: 20,
@@ -994,9 +994,9 @@ const styles = StyleSheet.create({
   filterInactive: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 12,
   },
   activeFilterText: {
@@ -1008,20 +1008,20 @@ const styles = StyleSheet.create({
   filterText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
     letterSpacing: 0.2,
   },
   content: {
     flex: 1,
   },
   orderCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 16,
     borderRadius: 20,
     padding: 16,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -1070,18 +1070,18 @@ const styles = StyleSheet.create({
   orderIdBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,
     marginBottom: 6,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   orderId: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#64748b',
+    color: '#a78bca',
     fontFamily: 'monospace',
     letterSpacing: 0.5,
     marginLeft: 4,
@@ -1118,7 +1118,7 @@ const styles = StyleSheet.create({
   orderCharge: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     letterSpacing: 0.3,
     marginLeft: 4,
   },
@@ -1131,7 +1131,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 8,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
@@ -1140,18 +1140,18 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     fontWeight: '700',
-    color: '#1e293b',
+    color: '#f5f3ff',
     lineHeight: 20,
   },
   orderLinkContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     padding: 10,
     borderRadius: 10,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   linkIconWrapper: {
     width: 24,
@@ -1164,7 +1164,7 @@ const styles = StyleSheet.create({
   },
   orderLink: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     flex: 1,
     fontWeight: '500',
   },
@@ -1189,7 +1189,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 11,
     fontWeight: '700',
-    color: '#64748b',
+    color: '#a78bca',
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },
@@ -1200,7 +1200,7 @@ const styles = StyleSheet.create({
   },
   progressBarBg: {
     height: 8,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
     borderRadius: 4,
     overflow: 'hidden',
   },
@@ -1224,7 +1224,7 @@ const styles = StyleSheet.create({
     padding: 12,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   detailItem: {
     flex: 1,
@@ -1234,12 +1234,12 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 8,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 6,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   detailDivider: {
     width: 1,
@@ -1248,7 +1248,7 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 9,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '700',
     marginBottom: 4,
     textTransform: 'uppercase',
@@ -1256,7 +1256,7 @@ const styles = StyleSheet.create({
   },
   detailValue: {
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: 'bold',
     letterSpacing: 0.3,
   },
@@ -1306,7 +1306,7 @@ const styles = StyleSheet.create({
   viewButtonText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#800080',
+    color: '#da6bff',
     marginLeft: 6,
     letterSpacing: 0.3,
   },
@@ -1336,13 +1336,13 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 8,
     letterSpacing: 0.2,
   },
   emptySubtitle: {
     fontSize: 14,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '500',
     textAlign: 'center',
     paddingHorizontal: 40,
@@ -1384,7 +1384,7 @@ const styles = StyleSheet.create({
   },
   // Alert Modal
   alertModalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 28,
     padding: 32,
     width: '100%',
@@ -1419,7 +1419,7 @@ const styles = StyleSheet.create({
   },
   alertMessage: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
     marginBottom: 24,
@@ -1447,7 +1447,7 @@ const styles = StyleSheet.create({
   },
   // Order Detail Modal
   detailModalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 24,
     width: '100%',
     maxWidth: 380,
@@ -1464,8 +1464,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
-    backgroundColor: '#fafbff',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
+    backgroundColor: '#07040d',
   },
   detailModalIcon: {
     width: 44,
@@ -1484,13 +1484,13 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   detailModalCloseBtn: {
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1509,25 +1509,25 @@ const styles = StyleSheet.create({
   },
   detailModalLabel: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     marginLeft: 10,
   },
   detailModalValue: {
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '700',
   },
   detailModalValueSmall: {
     fontSize: 12,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '600',
     maxWidth: '50%',
     textAlign: 'right',
   },
   detailModalValueHighlight: {
     fontSize: 16,
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: 'bold',
   },
   detailModalStatusBadge: {
@@ -1543,7 +1543,7 @@ const styles = StyleSheet.create({
   },
   detailModalDivider: {
     height: 1,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
     marginVertical: 12,
   },
   detailModalCloseButton: {

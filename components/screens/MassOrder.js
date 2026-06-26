@@ -101,7 +101,7 @@ const MassOrder = ({ navigate }) => {
           <TextInput
             style={styles.textArea}
             placeholder="Enter orders (one per line)"
-            placeholderTextColor="#cbd5e1"
+            placeholderTextColor="#6b5b85"
             value={orderData}
             onChangeText={setOrderData}
             multiline
@@ -133,7 +133,7 @@ const MassOrder = ({ navigate }) => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f8fafc' },
+  container: { flex: 1, backgroundColor: '#07040d' },
   header: {
     paddingTop: 50,
     paddingBottom: 20,
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
   headerSubtitle: { fontSize: 13, color: 'rgba(255,255,255,0.85)', marginTop: 2 },
   content: { flex: 1, marginTop: 10 },
   infoCard: {
-    backgroundColor: '#eff6ff',
+    backgroundColor: '#140c24',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 16,
@@ -166,25 +166,25 @@ const styles = StyleSheet.create({
   },
   infoTitle: { fontSize: 14, fontWeight: 'bold', color: '#1e40af', marginBottom: 8 },
   infoText: { fontSize: 13, color: '#3b82f6', marginBottom: 8, fontFamily: 'monospace' },
-  infoExample: { fontSize: 12, color: '#64748b', fontFamily: 'monospace', lineHeight: 20 },
+  infoExample: { fontSize: 12, color: '#a78bca', fontFamily: 'monospace', lineHeight: 20 },
   formCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 20,
     padding: 20,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     elevation: 3,
   },
   textArea: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     padding: 16,
     fontSize: 13,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontFamily: 'monospace',
     minHeight: 200,
     marginBottom: 20,

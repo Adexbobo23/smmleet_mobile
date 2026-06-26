@@ -158,7 +158,7 @@ const Transactions = ({ navigate }) => {
     return (
       <View style={[styles.container, styles.centerContent]}>
         <StatusBar style="light" backgroundColor="#800080" />
-        <ActivityIndicator size="large" color="#800080" />
+        <ActivityIndicator size="large" color="#da6bff" />
         <Text style={styles.loadingText}>Loading transactions...</Text>
       </View>
     );
@@ -246,9 +246,9 @@ const Transactions = ({ navigate }) => {
           <View style={styles.emptyState}>
             <View style={styles.emptyIconContainer}>
               <LinearGradient
-                colors={['#f3e8ff', '#faf5ff']}
+                colors={['#1c1232', '#140c24']}
                 style={styles.emptyIconGradient}>
-                <FontAwesomeIcon icon={faReceipt} size={60} color="#800080" />
+                <FontAwesomeIcon icon={faReceipt} size={60} color="#da6bff" />
               </LinearGradient>
             </View>
             <Text style={styles.emptyText}>No transactions found</Text>
@@ -292,7 +292,7 @@ const Transactions = ({ navigate }) => {
                     
                     <View style={styles.transactionMeta}>
                       <View style={styles.transactionMetaItem}>
-                        <FontAwesomeIcon icon={faClock} size={10} color="#94a3b8" />
+                        <FontAwesomeIcon icon={faClock} size={10} color="#8a76a8" />
                         <Text style={styles.transactionDate}>
                           {formatDate(transaction.created_at)}
                         </Text>
@@ -358,7 +358,7 @@ const Transactions = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   header: {
@@ -447,11 +447,11 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   filterContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     paddingVertical: 15,
     paddingHorizontal: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
     flexDirection: 'row',
     alignItems: 'center',
   },
@@ -476,7 +476,7 @@ const styles = StyleSheet.create({
   filterText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
   transactionCard: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 15,
     borderRadius: 18,
@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 4,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     overflow: 'hidden',
   },
   transactionCardGlow: {
@@ -535,7 +535,7 @@ const styles = StyleSheet.create({
   transactionId: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#64748b',
+    color: '#a78bca',
     fontFamily: 'monospace',
   },
   statusBadge: {
@@ -551,7 +551,7 @@ const styles = StyleSheet.create({
   transactionDesc: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 8,
   },
   transactionMeta: {
@@ -565,13 +565,13 @@ const styles = StyleSheet.create({
   },
   transactionDate: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginLeft: 4,
     fontWeight: '500',
   },
   transactionCrypto: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '600',
   },
   transactionNetwork: {
@@ -597,7 +597,7 @@ const styles = StyleSheet.create({
   },
   balanceAfter: {
     fontSize: 10,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '600',
   },
   emptyState: {
@@ -626,13 +626,13 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 20,
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 8,
     fontWeight: 'bold',
   },
   emptySubtext: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     fontWeight: '500',
   },
@@ -644,7 +644,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   gatewayBadgeHeleket: {
-    backgroundColor: '#eff6ff',
+    backgroundColor: '#140c24',
     borderColor: '#bfdbfe',
   },
   gatewayBadgeCryptomus: {

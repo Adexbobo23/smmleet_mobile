@@ -173,13 +173,13 @@ const PasswordReset = ({ navigate, route }) => {
             <View style={styles.inputGroup}>
               <View style={styles.inputContainer}>
                 <View style={styles.iconWrapper}>
-                  <FontAwesomeIcon icon={faLock} size={20} color="#800080" />
+                  <FontAwesomeIcon icon={faLock} size={20} color="#da6bff" />
                 </View>
                 <TextInput
                   ref={passwordRef}
                   style={styles.input}
                   placeholder="New Password"
-                  placeholderTextColor="#94a3b8"
+                  placeholderTextColor="#6b5b85"
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry={!showPassword}
@@ -194,20 +194,20 @@ const PasswordReset = ({ navigate, route }) => {
                   <FontAwesomeIcon
                     icon={showPassword ? faEye : faEyeSlash}
                     size={20}
-                    color="#94a3b8"
+                    color="#8a76a8"
                   />
                 </TouchableOpacity>
               </View>
 
               <View style={styles.inputContainer}>
                 <View style={styles.iconWrapper}>
-                  <FontAwesomeIcon icon={faLock} size={20} color="#800080" />
+                  <FontAwesomeIcon icon={faLock} size={20} color="#da6bff" />
                 </View>
                 <TextInput
                   ref={confirmPasswordRef}
                   style={styles.input}
                   placeholder="Confirm Password"
-                  placeholderTextColor="#94a3b8"
+                  placeholderTextColor="#6b5b85"
                   value={confirmPassword}
                   onChangeText={setConfirmPassword}
                   secureTextEntry={!showConfirmPassword}
@@ -222,7 +222,7 @@ const PasswordReset = ({ navigate, route }) => {
                   <FontAwesomeIcon
                     icon={showConfirmPassword ? faEye : faEyeSlash}
                     size={20}
-                    color="#94a3b8"
+                    color="#8a76a8"
                   />
                 </TouchableOpacity>
               </View>
@@ -283,7 +283,7 @@ const PasswordReset = ({ navigate, route }) => {
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -337,7 +337,7 @@ const styles = StyleSheet.create({
     marginTop: -25,
   },
   formCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 28,
     padding: 28,
     elevation: 6,
@@ -353,13 +353,13 @@ const styles = StyleSheet.create({
   titleName: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 12,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 15,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
   },
@@ -370,12 +370,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 2,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 16,
     marginBottom: 16,
     paddingHorizontal: 16,
     height: 58,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   iconWrapper: {
     width: 40,
@@ -389,14 +389,14 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 16,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '500',
   },
   eyeIcon: {
     padding: 10,
   },
   requirementsContainer: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 14,
     padding: 16,
     marginBottom: 24,
@@ -404,7 +404,7 @@ const styles = StyleSheet.create({
   requirementsTitle: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#475569',
+    color: '#cbb9e6',
     marginBottom: 12,
   },
   requirementRow: {
@@ -414,7 +414,7 @@ const styles = StyleSheet.create({
   },
   requirementText: {
     fontSize: 13,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginLeft: 10,
   },
   requirementTextValid: {
@@ -455,7 +455,7 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '500',
   },
 });

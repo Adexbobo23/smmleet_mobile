@@ -126,7 +126,7 @@ const ServicesList = ({ navigate }) => {
     return (
       <View style={[styles.container, styles.centerContent]}>
         <StatusBar style="light" backgroundColor="#800080" />
-        <ActivityIndicator size="large" color="#800080" />
+        <ActivityIndicator size="large" color="#da6bff" />
         <Text style={styles.loadingText}>Loading services...</Text>
       </View>
     );
@@ -147,11 +147,11 @@ const ServicesList = ({ navigate }) => {
         
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <FontAwesomeIcon icon={faSearch} size={16} color="#800080" style={styles.searchIcon} />
+          <FontAwesomeIcon icon={faSearch} size={16} color="#da6bff" style={styles.searchIcon} />
           <TextInput
             style={styles.searchInput}
             placeholder="Search services..."
-            placeholderTextColor="#94a3b8"
+            placeholderTextColor="#6b5b85"
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
@@ -249,7 +249,7 @@ const ServicesList = ({ navigate }) => {
                 </View>
                 {service.average_time && (
                   <View style={styles.detailItem}>
-                    <FontAwesomeIcon icon={faClock} size={12} color="#64748b" />
+                    <FontAwesomeIcon icon={faClock} size={12} color="#a78bca" />
                     <Text style={styles.deliveryText}>{service.average_time}</Text>
                   </View>
                 )}
@@ -259,7 +259,7 @@ const ServicesList = ({ navigate }) => {
                 style={styles.orderButton}
                 onPress={() => navigate('NewOrder')}>
                 <Text style={styles.orderButtonText}>Order Now</Text>
-                <FontAwesomeIcon icon={faChevronRight} size={14} color="#800080" />
+                <FontAwesomeIcon icon={faChevronRight} size={14} color="#da6bff" />
               </TouchableOpacity>
             </TouchableOpacity>
           ))
@@ -276,7 +276,7 @@ const ServicesList = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   header: {
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 12,
     paddingHorizontal: 15,
     height: 48,
@@ -320,13 +320,13 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   categoryContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     paddingVertical: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#e2e8f0',
+    borderBottomColor: 'rgba(255,255,255,0.08)',
   },
   categoryScroll: {
     paddingHorizontal: 20,
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
   categoryText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
     paddingHorizontal: 16,
     paddingVertical: 8,
   },
@@ -356,7 +356,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   serviceCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 15,
     borderRadius: 16,
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   serviceIdBadge: {
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 8,
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   serviceIdText: {
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     fontFamily: 'monospace',
   },
   serviceRating: {
@@ -402,19 +402,19 @@ const styles = StyleSheet.create({
   serviceName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 6,
   },
   serviceDescription: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     lineHeight: 20,
     marginBottom: 12,
   },
   serviceDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 10,
     padding: 12,
     marginBottom: 12,
@@ -424,18 +424,18 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 10,
-    color: '#94a3b8',
+    color: '#8a76a8',
     fontWeight: '600',
     marginBottom: 4,
   },
   detailValue: {
     fontSize: 13,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: 'bold',
   },
   deliveryText: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     marginLeft: 4,
     fontWeight: '600',
   },
@@ -443,16 +443,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     borderRadius: 10,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#e9d5ff',
+    borderColor: 'rgba(198,61,255,0.25)',
   },
   orderButtonText: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     marginRight: 6,
   },
   emptyState: {
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginBottom: 8,
   },
   emptySubtext: {

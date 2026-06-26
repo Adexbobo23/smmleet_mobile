@@ -87,7 +87,7 @@ const ComingSoon = ({ navigate, title = 'Feature' }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   header: {
     paddingTop: 50,
@@ -137,18 +137,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 12,
   },
   subtitle: {
     fontSize: 15,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 30,
   },
   infoCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 16,
     padding: 20,
     width: '100%',
@@ -162,12 +162,12 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 12,
   },
   infoText: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     lineHeight: 24,
   },
   notifyButton: {
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   backToHomeText: {
-    color: '#800080',
+    color: '#da6bff',
     fontSize: 15,
     fontWeight: '600',
   },

@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  Platform,
   ActivityIndicator,
   Alert,
   Keyboard,
@@ -29,98 +28,67 @@ const Login = ({ navigate }) => {
 
   const handleLogin = async () => {
     Keyboard.dismiss();
-    
-    if (!username.trim()) {
-      Alert.alert('Error', 'Please enter your username or email');
-      return;
-    }
-
-    if (!password.trim()) {
-      Alert.alert('Error', 'Please enter your password');
-      return;
-    }
+    if (!username.trim()) { Alert.alert('Error', 'Please enter your username or email'); return; }
+    if (!password.trim()) { Alert.alert('Error', 'Please enter your password'); return; }
 
     setLoading(true);
     try {
-      const response = await ApiService.login({
-        username: username.trim(),
-        password: password.trim(),
-      });
-
+      const response = await ApiService.login({ username: username.trim(), password: password.trim() });
       console.log('Login response:', response);
-
-      // Check for successful login
       if (response.success || response.user) {
-        // Login successful - navigate to Dashboard
         navigate('Dashboard');
       } else {
-        // Handle unexpected response format
         Alert.alert('Login Failed', response.message || 'Invalid credentials. Please try again.');
       }
     } catch (error) {
       console.error('Login error:', error);
-      Alert.alert(
-        'Login Failed', 
-        error.message || 'Invalid credentials. Please check your username and password.'
-      );
+      Alert.alert('Login Failed', error.message || 'Invalid credentials. Please check your username and password.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleGotoSignUp = () => {
-    Keyboard.dismiss();
-    navigate('SignUp');
-  };
-
-  const handleGotoForgetPassword = () => {
-    Keyboard.dismiss();
-    navigate('ForgetPassword');
-  };
+  const handleGotoSignUp = () => { Keyboard.dismiss(); navigate('SignUp'); };
+  const handleGotoForgetPassword = () => { Keyboard.dismiss(); navigate('ForgetPassword'); };
 
   return (
     <View style={styles.mainContainer}>
-      <StatusBar style="light" backgroundColor="#800080" />
+      <StatusBar style="light" backgroundColor="#07040d" />
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}>
-        <LinearGradient
-          colors={['#800080', '#9933cc', '#800080']}
-          style={styles.headerGradient}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}>
+
+        {/* Neon header */}
+        <View style={styles.header}>
+          <View style={styles.auroraA} />
+          <View style={styles.auroraB} />
           <View style={styles.logoContainer}>
-            <Image
-              source={require('../assets/smmleetword.png')}
-              style={styles.logoTop}
-              resizeMode="contain"
-            />
-            <View style={styles.glowEffect} />
+            <Image source={require('../assets/smmleetword.png')} style={styles.logoTop} resizeMode="contain" />
           </View>
-        </LinearGradient>
+          <Text style={styles.eyebrow}>// SECURE ACCESS</Text>
+        </View>
 
         <View style={styles.container}>
           <View style={styles.formCard}>
             <View style={styles.welcomeHeader}>
-              <Text style={styles.titleName}>Welcome Back</Text>
-              <Text style={styles.subtitle}>Sign in to continue to SMMLEET</Text>
+              <Text style={styles.titleName}>Welcome back</Text>
+              <Text style={styles.subtitle}>Log in to your growth control panel</Text>
             </View>
 
             <View style={styles.inputGroup}>
               <View style={styles.inputContainer}>
                 <View style={styles.iconWrapper}>
-                  <FontAwesomeIcon icon={faUser} size={20} color="#800080" />
+                  <FontAwesomeIcon icon={faUser} size={18} color="#da6bff" />
                 </View>
                 <TextInput
                   ref={usernameRef}
                   style={styles.input}
                   placeholder="Username"
-                  placeholderTextColor="#94a3b8"
+                  placeholderTextColor="#6b5b85"
                   value={username}
                   onChangeText={setUsername}
                   autoCapitalize="none"
-                  autoCorrect={false}
                   returnKeyType="next"
                   onSubmitEditing={() => passwordRef.current?.focus()}
                 />
@@ -128,78 +96,55 @@ const Login = ({ navigate }) => {
 
               <View style={styles.inputContainer}>
                 <View style={styles.iconWrapper}>
-                  <FontAwesomeIcon icon={faLock} size={20} color="#800080" />
+                  <FontAwesomeIcon icon={faLock} size={18} color="#da6bff" />
                 </View>
                 <TextInput
                   ref={passwordRef}
                   style={styles.input}
                   placeholder="Password"
-                  placeholderTextColor="#94a3b8"
+                  placeholderTextColor="#6b5b85"
                   value={password}
                   onChangeText={setPassword}
                   secureTextEntry={!showPassword}
-                  autoCorrect={false}
                   returnKeyType="done"
                   onSubmitEditing={handleLogin}
                 />
-                <TouchableOpacity
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.eyeIcon}
-                  activeOpacity={0.7}>
-                  <FontAwesomeIcon
-                    icon={showPassword ? faEye : faEyeSlash}
-                    size={20}
-                    color="#94a3b8"
-                  />
+                <TouchableOpacity style={styles.eyeBtn} onPress={() => setShowPassword(!showPassword)}>
+                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} size={18} color="#8a76a8" />
                 </TouchableOpacity>
               </View>
+
+              <TouchableOpacity style={styles.forgotWrap} onPress={handleGotoForgetPassword}>
+                <Text style={styles.forgotText}>Forgot Password?</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity activeOpacity={0.9} onPress={handleLogin} disabled={loading}>
+                <LinearGradient
+                  colors={['#8b008b', '#c63dff']}
+                  style={styles.loginButton}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}>
+                  {loading ? (
+                    <ActivityIndicator color="#fff" />
+                  ) : (
+                    <>
+                      <Text style={styles.loginButtonText}>Log in</Text>
+                      <FontAwesomeIcon icon={faArrowRight} size={16} color="#fff" />
+                    </>
+                  )}
+                </LinearGradient>
+              </TouchableOpacity>
             </View>
 
-            <TouchableOpacity
-              onPress={handleGotoForgetPassword}
-              style={styles.forgetPasswordContainer}
-              activeOpacity={0.7}>
-              <Text style={styles.forgetPasswordText}>Forgot Password?</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={handleLogin}
-              disabled={loading}
-              activeOpacity={0.9}>
-              <LinearGradient
-                colors={['#800080', '#9933cc']}
-                style={styles.buttonGradient}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}>
-                {loading ? (
-                  <ActivityIndicator color="#fff" size="small" />
-                ) : (
-                  <>
-                    <Text style={styles.buttonText}>Sign In</Text>
-                    <FontAwesomeIcon icon={faArrowRight} size={18} color="#fff" style={styles.buttonIcon} />
-                  </>
-                )}
-              </LinearGradient>
-            </TouchableOpacity>
-
-            <View style={styles.dividerContainer}>
-              <View style={styles.divider} />
-              <Text style={styles.dividerText}>OR</Text>
-              <View style={styles.divider} />
-            </View>
-
-            <View style={styles.signUpContainer}>
-              <Text style={styles.signUpText}>Don't have an account? </Text>
-              <TouchableOpacity onPress={handleGotoSignUp} activeOpacity={0.7}>
-                <Text style={styles.signUpLink}>Sign Up</Text>
+            <View style={styles.signupRow}>
+              <Text style={styles.signupMuted}>Don't have an account? </Text>
+              <TouchableOpacity onPress={handleGotoSignUp}>
+                <Text style={styles.signupLink}>Sign Up</Text>
               </TouchableOpacity>
             </View>
           </View>
 
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>🔒 Secure Login</Text>
-          </View>
+          <Text style={styles.footerNote}>© 2026 SMMLEET // encrypted session</Text>
         </View>
       </ScrollView>
     </View>
@@ -207,174 +152,45 @@ const Login = ({ navigate }) => {
 };
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#f8fafc',
+  mainContainer: { flex: 1, backgroundColor: '#07040d' },
+  scrollContainer: { flexGrow: 1 },
+  header: {
+    height: 240, backgroundColor: '#0d0818', alignItems: 'center', justifyContent: 'center',
+    borderBottomWidth: 1, borderColor: 'rgba(198,61,255,0.15)', overflow: 'hidden',
   },
-  scrollContainer: {
-    flexGrow: 1,
-  },
-  headerGradient: {
-    paddingTop: Platform.OS === 'ios' ? 60 : 50,
-    paddingBottom: 50,
-    borderBottomLeftRadius: 35,
-    borderBottomRightRadius: 35,
-    elevation: 8,
-    shadowColor: '#800080',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-  },
-  logoContainer: {
-    alignItems: 'center',
-    position: 'relative',
-  },
-  logoTop: {
-    width: 240,
-    height: 110,
-  },
-  glowEffect: {
-    position: 'absolute',
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    top: -20,
-  },
-  container: {
-    flex: 1,
-    paddingHorizontal: 20,
-    marginTop: -25,
-  },
+  auroraA: { position: 'absolute', top: -60, left: -40, width: 220, height: 220, borderRadius: 110, backgroundColor: 'rgba(139,0,139,0.45)' },
+  auroraB: { position: 'absolute', bottom: -70, right: -30, width: 200, height: 200, borderRadius: 100, backgroundColor: 'rgba(34,211,238,0.20)' },
+  logoContainer: { alignItems: 'center', justifyContent: 'center' },
+  logoTop: { width: 200, height: 70 },
+  eyebrow: { color: '#da6bff', fontSize: 11, letterSpacing: 3, marginTop: 10, fontWeight: '700' },
+  container: { flex: 1, paddingHorizontal: 20, marginTop: -28 },
   formCard: {
-    backgroundColor: '#fff',
-    borderRadius: 28,
-    padding: 28,
-    elevation: 6,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.12,
-    shadowRadius: 10,
+    backgroundColor: '#140c24', borderRadius: 22, padding: 24,
+    borderWidth: 1, borderColor: 'rgba(255,255,255,0.07)',
+    shadowColor: '#000', shadowOffset: { width: 0, height: 12 }, shadowOpacity: 0.5, shadowRadius: 24, elevation: 10,
   },
-  welcomeHeader: {
-    alignItems: 'center',
-    marginBottom: 32,
-  },
-  titleName: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: '#1e293b',
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 15,
-    color: '#64748b',
-  },
-  inputGroup: {
-    marginBottom: 16,
-  },
+  welcomeHeader: { marginBottom: 22 },
+  titleName: { fontSize: 26, fontWeight: 'bold', color: '#f5f3ff', letterSpacing: 0.3 },
+  subtitle: { fontSize: 13.5, color: '#a78bca', marginTop: 4 },
+  inputGroup: { gap: 14 },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: '#e2e8f0',
-    borderRadius: 16,
-    marginBottom: 16,
-    paddingHorizontal: 16,
-    height: 58,
-    backgroundColor: '#f8fafc',
+    flexDirection: 'row', alignItems: 'center', backgroundColor: '#0d0818',
+    borderRadius: 14, borderWidth: 1, borderColor: 'rgba(255,255,255,0.09)', paddingHorizontal: 12, height: 54,
   },
-  iconWrapper: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: 'rgba(128, 0, 128, 0.08)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 12,
+  iconWrapper: { width: 30, alignItems: 'center' },
+  input: { flex: 1, color: '#fff', fontSize: 15, paddingHorizontal: 6 },
+  eyeBtn: { padding: 6 },
+  forgotWrap: { alignSelf: 'flex-end', marginTop: -2 },
+  forgotText: { color: '#da6bff', fontSize: 12.5, fontWeight: '600' },
+  loginButton: {
+    height: 54, borderRadius: 14, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, marginTop: 6,
+    shadowColor: '#c63dff', shadowOffset: { width: 0, height: 8 }, shadowOpacity: 0.5, shadowRadius: 14, elevation: 8,
   },
-  input: {
-    flex: 1,
-    fontSize: 16,
-    color: '#1e293b',
-    fontWeight: '500',
-  },
-  eyeIcon: {
-    padding: 10,
-  },
-  forgetPasswordContainer: {
-    alignSelf: 'flex-end',
-    marginBottom: 24,
-  },
-  forgetPasswordText: {
-    color: '#800080',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  button: {
-    borderRadius: 16,
-    overflow: 'hidden',
-    elevation: 5,
-    shadowColor: '#800080',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-  },
-  buttonGradient: {
-    flexDirection: 'row',
-    paddingVertical: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginRight: 8,
-  },
-  buttonIcon: {
-    marginLeft: 4,
-  },
-  dividerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 28,
-  },
-  divider: {
-    flex: 1,
-    height: 1,
-    backgroundColor: '#e2e8f0',
-  },
-  dividerText: {
-    marginHorizontal: 16,
-    color: '#94a3b8',
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  signUpContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  signUpText: {
-    color: '#64748b',
-    fontSize: 15,
-  },
-  signUpLink: {
-    color: '#800080',
-    fontSize: 15,
-    fontWeight: 'bold',
-  },
-  footer: {
-    alignItems: 'center',
-    marginTop: 24,
-    marginBottom: 20,
-  },
-  footerText: {
-    fontSize: 13,
-    color: '#64748b',
-    fontWeight: '500',
-  },
+  loginButtonText: { color: '#fff', fontSize: 16, fontWeight: 'bold', letterSpacing: 0.3 },
+  signupRow: { flexDirection: 'row', justifyContent: 'center', marginTop: 22 },
+  signupMuted: { color: '#a78bca', fontSize: 13.5 },
+  signupLink: { color: '#da6bff', fontSize: 13.5, fontWeight: 'bold' },
+  footerNote: { textAlign: 'center', color: '#5b4a78', fontSize: 11, marginTop: 22, marginBottom: 10 },
 });
 
 export default Login;

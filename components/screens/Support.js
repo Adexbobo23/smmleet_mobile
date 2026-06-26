@@ -135,7 +135,7 @@ const Support = ({ navigate }) => {
     return (
       <View style={[styles.container, styles.centerContent]}>
         <StatusBar style="light" backgroundColor="#800080" />
-        <ActivityIndicator size="large" color="#800080" />
+        <ActivityIndicator size="large" color="#da6bff" />
         <Text style={styles.loadingText}>Loading tickets...</Text>
       </View>
     );
@@ -163,7 +163,7 @@ const Support = ({ navigate }) => {
           style={styles.newTicketButton}
           onPress={() => setShowNewTicketModal(true)}
           activeOpacity={0.9}>
-          <FontAwesomeIcon icon={faPlus} size={16} color="#800080" />
+          <FontAwesomeIcon icon={faPlus} size={16} color="#da6bff" />
           <Text style={styles.newTicketText}>New Ticket</Text>
         </TouchableOpacity>
       </LinearGradient>
@@ -223,7 +223,7 @@ const Support = ({ navigate }) => {
                   <Text style={styles.ticketDate}>📅 {formatDate(ticket.created_at)}</Text>
                   {ticket.replies_count !== undefined && (
                     <View style={styles.repliesContainer}>
-                      <FontAwesomeIcon icon={faComment} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faComment} size={12} color="#da6bff" />
                       <Text style={styles.repliesText}>{ticket.replies_count} replies</Text>
                     </View>
                   )}
@@ -251,7 +251,7 @@ const Support = ({ navigate }) => {
               <TextInput
                 style={styles.input}
                 placeholder="Enter ticket subject..."
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={subject}
                 onChangeText={setSubject}
               />
@@ -262,7 +262,7 @@ const Support = ({ navigate }) => {
               <TextInput
                 style={[styles.input, styles.messageInput]}
                 placeholder="Describe your issue in detail..."
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={message}
                 onChangeText={setMessage}
                 multiline
@@ -315,7 +315,7 @@ const Support = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   header: {
@@ -356,12 +356,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 12,
     paddingVertical: 14,
   },
   newTicketText: {
-    color: '#800080',
+    color: '#da6bff',
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 8,
@@ -371,7 +371,7 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   ticketCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 15,
     borderRadius: 16,
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
   ticketId: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#64748b',
+    color: '#a78bca',
     fontFamily: 'monospace',
   },
   statusBadge: {
@@ -409,12 +409,12 @@ const styles = StyleSheet.create({
   ticketSubject: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 8,
   },
   ticketMessage: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -425,12 +425,12 @@ const styles = StyleSheet.create({
   },
   ticketDate: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
   },
   repliesContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
   repliesText: {
     fontSize: 11,
     fontWeight: '600',
-    color: '#800080',
+    color: '#da6bff',
     marginLeft: 6,
   },
   emptyState: {
@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginTop: 20,
     marginBottom: 20,
   },
@@ -469,7 +469,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
@@ -478,7 +478,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 20,
   },
   inputGroup: {
@@ -487,19 +487,19 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 8,
     letterSpacing: 0.5,
   },
   input: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   messageInput: {
     minHeight: 150,
@@ -512,7 +512,7 @@ const styles = StyleSheet.create({
   },
   modalCancelButton: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 12,
     paddingVertical: 14,
     alignItems: 'center',
@@ -520,7 +520,7 @@ const styles = StyleSheet.create({
   modalCancelText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
   },
   modalSubmitButton: {
     flex: 1,

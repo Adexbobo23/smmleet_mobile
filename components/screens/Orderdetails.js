@@ -123,9 +123,9 @@ const OrderDetails = ({ navigate, orderId }) => {
         };
       default:
         return {
-          color: '#64748b',
+          color: '#a78bca',
           bgColor: '#f1f5f9',
-          borderColor: '#cbd5e1',
+          borderColor: 'rgba(255,255,255,0.12)',
           icon: faInfoCircle,
           title: 'Unknown',
           description: 'Status unknown',
@@ -207,7 +207,7 @@ const OrderDetails = ({ navigate, orderId }) => {
         {/* Status Card */}
         <View style={styles.statusCard}>
           <LinearGradient
-            colors={[statusInfo.bgColor, '#ffffff']}
+            colors={[statusInfo.bgColor, '#0d0818']}
             style={styles.statusGradient}
             start={{ x: 0, y: 0 }}
             end={{ x: 0, y: 1 }}>
@@ -254,7 +254,7 @@ const OrderDetails = ({ navigate, orderId }) => {
           
           <View style={styles.infoRow}>
             <View style={styles.infoIcon}>
-              <FontAwesomeIcon icon={faHashtag} size={16} color="#64748b" />
+              <FontAwesomeIcon icon={faHashtag} size={16} color="#a78bca" />
             </View>
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Order ID</Text>
@@ -264,7 +264,7 @@ const OrderDetails = ({ navigate, orderId }) => {
 
           <View style={styles.infoRow}>
             <View style={styles.infoIcon}>
-              <FontAwesomeIcon icon={faLayerGroup} size={16} color="#64748b" />
+              <FontAwesomeIcon icon={faLayerGroup} size={16} color="#a78bca" />
             </View>
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Service</Text>
@@ -274,7 +274,7 @@ const OrderDetails = ({ navigate, orderId }) => {
 
           <View style={styles.infoRow}>
             <View style={styles.infoIcon}>
-              <FontAwesomeIcon icon={faLink} size={16} color="#64748b" />
+              <FontAwesomeIcon icon={faLink} size={16} color="#a78bca" />
             </View>
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Link</Text>
@@ -284,7 +284,7 @@ const OrderDetails = ({ navigate, orderId }) => {
 
           <View style={styles.infoRow}>
             <View style={styles.infoIcon}>
-              <FontAwesomeIcon icon={faChartLine} size={16} color="#64748b" />
+              <FontAwesomeIcon icon={faChartLine} size={16} color="#a78bca" />
             </View>
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Quantity</Text>
@@ -295,7 +295,7 @@ const OrderDetails = ({ navigate, orderId }) => {
           {startCount > 0 && (
             <View style={styles.infoRow}>
               <View style={styles.infoIcon}>
-                <FontAwesomeIcon icon={faChartLine} size={16} color="#64748b" />
+                <FontAwesomeIcon icon={faChartLine} size={16} color="#a78bca" />
               </View>
               <View style={styles.infoContent}>
                 <Text style={styles.infoLabel}>Start Count</Text>
@@ -306,7 +306,7 @@ const OrderDetails = ({ navigate, orderId }) => {
 
           <View style={styles.infoRow}>
             <View style={styles.infoIcon}>
-              <FontAwesomeIcon icon={faCalendar} size={16} color="#64748b" />
+              <FontAwesomeIcon icon={faCalendar} size={16} color="#a78bca" />
             </View>
             <View style={styles.infoContent}>
               <Text style={styles.infoLabel}>Created</Text>
@@ -319,7 +319,7 @@ const OrderDetails = ({ navigate, orderId }) => {
           {order.completed_at && (
             <View style={styles.infoRow}>
               <View style={styles.infoIcon}>
-                <FontAwesomeIcon icon={faCalendar} size={16} color="#64748b" />
+                <FontAwesomeIcon icon={faCalendar} size={16} color="#a78bca" />
               </View>
               <View style={styles.infoContent}>
                 <Text style={styles.infoLabel}>Completed</Text>
@@ -373,7 +373,7 @@ const OrderDetails = ({ navigate, orderId }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -392,7 +392,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 20,
   },
   backButton: {
@@ -489,7 +489,7 @@ const styles = StyleSheet.create({
   },
   statusDescription: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     marginBottom: 24,
   },
@@ -505,7 +505,7 @@ const styles = StyleSheet.create({
   progressText: {
     fontSize: 13,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
   },
   progressPercentage: {
     fontSize: 20,
@@ -513,7 +513,7 @@ const styles = StyleSheet.create({
   },
   progressBarBg: {
     height: 12,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
     borderRadius: 6,
     overflow: 'hidden',
   },
@@ -528,21 +528,21 @@ const styles = StyleSheet.create({
   },
   progressStat: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '500',
   },
   progressStatValue: {
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   infoCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginBottom: 20,
     borderRadius: 22,
     padding: 20,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -552,7 +552,7 @@ const styles = StyleSheet.create({
   infoCardTitle: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 20,
   },
   infoRow: {
@@ -564,7 +564,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 14,
@@ -574,7 +574,7 @@ const styles = StyleSheet.create({
   },
   infoLabel: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginBottom: 4,
     fontWeight: '600',
     textTransform: 'uppercase',
@@ -582,7 +582,7 @@ const styles = StyleSheet.create({
   },
   infoValue: {
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '600',
   },
   infoValueLink: {
@@ -621,7 +621,7 @@ const styles = StyleSheet.create({
   noticeCard: {
     marginHorizontal: 20,
     marginBottom: 12,
-    backgroundColor: '#eff6ff',
+    backgroundColor: '#140c24',
     borderRadius: 16,
     padding: 16,
     flexDirection: 'row',

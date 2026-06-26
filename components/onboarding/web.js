@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 3,
   },
   loadingOverlay: {
@@ -347,7 +347,7 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     borderWidth: 4,
     borderColor: 'transparent',
-    borderTopColor: '#800080',
+    borderTopColor: 'rgba(198,61,255,0.45)',
     borderRightColor: '#a020f0',
   },
   ringSegment2: {
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     borderRadius: 90,
     borderWidth: 4,
     borderColor: 'transparent',
-    borderBottomColor: '#800080',
+    borderBottomColor: 'rgba(198,61,255,0.45)',
     borderLeftColor: '#a020f0',
     transform: [{ rotate: '180deg' }],
   },
@@ -419,7 +419,7 @@ const styles = StyleSheet.create({
   progressText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#a020f0',
+    color: '#da6bff',
     textAlign: 'center',
   },
   errorContainer: {
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
   },
   webview: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
   },
 });
 

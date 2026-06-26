@@ -50,10 +50,10 @@ const PasswordResetSuccessful = ({ navigate }) => {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" backgroundColor="#f5f5f5" />
+      <StatusBar style="light" backgroundColor="#07040d" />
       
       <LinearGradient
-        colors={['#f8f4ff', '#ffffff', '#f8f4ff']}
+        colors={['#140c24', '#0d0818', '#140c24']}
         style={styles.gradient}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}>
@@ -162,7 +162,7 @@ const PasswordResetSuccessful = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#0d0818',
   },
   gradient: {
     flex: 1,
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     height: 160,
     borderRadius: 80,
     borderWidth: 3,
-    borderColor: '#800080',
+    borderColor: 'rgba(198,61,255,0.45)',
     top: 0,
     left: 0,
   },
@@ -220,13 +220,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#333',
+    color: '#ede9fe',
     marginBottom: 12,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 15,
-    color: '#666',
+    color: '#a78bca',
     textAlign: 'center',
     lineHeight: 22,
     paddingHorizontal: 10,

@@ -126,7 +126,7 @@ const Wallet = ({ navigate }) => {
     return (
       <View style={[styles.container, styles.centerContent]}>
         <StatusBar style="light" backgroundColor="#800080" />
-        <ActivityIndicator size="large" color="#800080" />
+        <ActivityIndicator size="large" color="#da6bff" />
         <Text style={styles.loadingText}>Loading wallet...</Text>
       </View>
     );
@@ -190,11 +190,11 @@ const Wallet = ({ navigate }) => {
               onPress={openWebFunding}
               activeOpacity={0.9}>
               <LinearGradient
-                colors={['#ffffff', '#f8fafc']}
+                colors={['#140c24', '#0d0818']}
                 style={styles.addFundsGradient}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 0, y: 1 }}>
-                <FontAwesomeIcon icon={faExternalLinkAlt} size={15} color="#800080" />
+                <FontAwesomeIcon icon={faExternalLinkAlt} size={15} color="#da6bff" />
                 <Text style={styles.addFundsButtonText}>Add Funds on Web</Text>
               </LinearGradient>
             </TouchableOpacity>
@@ -204,7 +204,7 @@ const Wallet = ({ navigate }) => {
         {/* Fund on web notice */}
         <View style={styles.webNoticeCard}>
           <View style={styles.webNoticeIcon}>
-            <FontAwesomeIcon icon={faInfoCircle} size={18} color="#800080" />
+            <FontAwesomeIcon icon={faInfoCircle} size={18} color="#da6bff" />
           </View>
           <View style={styles.webNoticeTextWrap}>
             <Text style={styles.webNoticeTitle}>Funding is available on the web</Text>
@@ -258,16 +258,16 @@ const Wallet = ({ navigate }) => {
         {/* Recent Transactions */}
         <View style={styles.transactionsCard}>
           <LinearGradient
-            colors={['#fafbff', '#ffffff']}
+            colors={['#0d0818', '#140c24']}
             style={styles.transactionsHeader}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}>
             <View style={styles.transactionsTitleContainer}>
               <View style={styles.transactionsIcon}>
                 <LinearGradient
-                  colors={['#f3e8ff', '#faf5ff']}
+                  colors={['#1c1232', '#140c24']}
                   style={styles.transactionsIconGradient}>
-                  <FontAwesomeIcon icon={faReceipt} size={14} color="#800080" />
+                  <FontAwesomeIcon icon={faReceipt} size={14} color="#da6bff" />
                 </LinearGradient>
               </View>
               <Text style={styles.transactionsTitle}>Recent Transactions</Text>
@@ -277,7 +277,7 @@ const Wallet = ({ navigate }) => {
               activeOpacity={0.8}
               onPress={() => navigate('Transactions')}>
               <LinearGradient
-                colors={['#f3e8ff', '#faf5ff']}
+                colors={['#1c1232', '#140c24']}
                 style={styles.viewAllGradient}>
                 <Text style={styles.viewAllText}>View All</Text>
               </LinearGradient>
@@ -309,7 +309,7 @@ const Wallet = ({ navigate }) => {
                           {transaction.description || transaction.transaction_type}
                         </Text>
                         <View style={styles.transactionDateContainer}>
-                          <FontAwesomeIcon icon={faClock} size={9} color="#94a3b8" />
+                          <FontAwesomeIcon icon={faClock} size={9} color="#8a76a8" />
                           <Text style={styles.transactionDate}>
                             {formatDate(transaction.created_at)}
                           </Text>
@@ -343,16 +343,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginTop: 16,
     padding: 16,
-    backgroundColor: '#faf5ff',
+    backgroundColor: '#140c24',
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#e9d5ff',
+    borderColor: 'rgba(198,61,255,0.25)',
   },
   webNoticeIcon: {
     width: 38,
     height: 38,
     borderRadius: 19,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -363,24 +363,24 @@ const styles = StyleSheet.create({
   webNoticeTitle: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#581c87',
+    color: '#e89bff',
     marginBottom: 4,
   },
   webNoticeBody: {
     fontSize: 12.5,
     lineHeight: 18,
-    color: '#6b21a8',
+    color: '#e89bff',
   },
   webNoticeLink: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#800080',
+    color: '#da6bff',
     marginTop: 8,
     textDecorationLine: 'underline',
   },
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -389,7 +389,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   header: {
@@ -546,7 +546,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
   },
   addFundsButtonText: {
-    color: '#800080',
+    color: '#da6bff',
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 8,
@@ -560,12 +560,12 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 18,
     padding: 18,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -593,20 +593,20 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 5,
     letterSpacing: 0.3,
   },
   statLabel: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     marginBottom: 12,
   },
   statBar: {
     width: '100%',
     height: 5,
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#140c24',
     borderRadius: 3,
     overflow: 'hidden',
   },
@@ -615,12 +615,12 @@ const styles = StyleSheet.create({
     borderRadius: 3,
   },
   transactionsCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginTop: 20,
     borderRadius: 22,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     overflow: 'hidden',
     elevation: 3,
     shadowColor: '#000',
@@ -634,7 +634,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   transactionsTitleContainer: {
     flexDirection: 'row',
@@ -661,7 +661,7 @@ const styles = StyleSheet.create({
   transactionsTitle: {
     fontSize: 17,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     letterSpacing: 0.2,
   },
   viewAllButton: {
@@ -675,7 +675,7 @@ const styles = StyleSheet.create({
   viewAllText: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     letterSpacing: 0.3,
   },
   transactionsList: {
@@ -687,7 +687,7 @@ const styles = StyleSheet.create({
   },
   emptyTransactionsText: {
     fontSize: 14,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginTop: 12,
   },
   transactionItem: {
@@ -729,13 +729,13 @@ const styles = StyleSheet.create({
   transactionDesc: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 6,
   },
   transactionDateContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignSelf: 'flex-start',
     paddingHorizontal: 8,
     paddingVertical: 3,
@@ -743,7 +743,7 @@ const styles = StyleSheet.create({
   },
   transactionDate: {
     fontSize: 10,
-    color: '#64748b',
+    color: '#a78bca',
     marginLeft: 5,
     fontWeight: '600',
   },
@@ -765,7 +765,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 24,
@@ -782,22 +782,22 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 26,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 6,
     letterSpacing: 0.3,
   },
   modalSubtitle: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 24,
     fontWeight: '500',
   },
   amountInputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 2,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 16,
     paddingHorizontal: 20,
     marginBottom: 12,
@@ -805,14 +805,14 @@ const styles = StyleSheet.create({
   dollarSign: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     marginRight: 10,
   },
   amountInput: {
     flex: 1,
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     paddingVertical: 18,
   },
   bonusContainer: {
@@ -855,9 +855,9 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   quickAmountButton: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 12,
     overflow: 'hidden',
     minWidth: 70,
@@ -868,12 +868,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   activeQuickAmount: {
-    borderColor: '#800080',
+    borderColor: 'rgba(198,61,255,0.45)',
   },
   quickAmountText: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#64748b',
+    color: '#a78bca',
     paddingHorizontal: 20,
     paddingVertical: 12,
     textAlign: 'center',
@@ -886,7 +886,7 @@ const styles = StyleSheet.create({
   paymentMethodsLabel: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 14,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
@@ -899,16 +899,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     padding: 16,
     marginBottom: 12,
   },
   activePaymentMethod: {
-    borderColor: '#800080',
-    backgroundColor: '#faf5ff',
+    borderColor: 'rgba(198,61,255,0.45)',
+    backgroundColor: '#140c24',
   },
   paymentMethodLeft: {
     flexDirection: 'row',
@@ -931,20 +931,20 @@ const styles = StyleSheet.create({
   paymentMethodName: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1e293b',
+    color: '#f5f3ff',
     letterSpacing: 0.2,
     marginBottom: 4,
   },
   paymentMethodDesc: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '500',
   },
   checkIconContainer: {
     width: 28,
     height: 28,
     borderRadius: 8,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 10,
@@ -956,17 +956,17 @@ const styles = StyleSheet.create({
   },
   modalCancelButton: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 14,
     paddingVertical: 16,
     alignItems: 'center',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   modalCancelText: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#64748b',
+    color: '#a78bca',
     letterSpacing: 0.3,
   },
   modalConfirmButton: {

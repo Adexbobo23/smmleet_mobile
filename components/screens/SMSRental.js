@@ -553,7 +553,7 @@ const SMSRental = ({ navigate }) => {
                   <TouchableOpacity 
                     style={styles.copyBtn}
                     onPress={() => copyToClipboard(activeRental.phone_number)}>
-                    <FontAwesomeIcon icon={faCopy} size={16} color="#800080" />
+                    <FontAwesomeIcon icon={faCopy} size={16} color="#da6bff" />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -562,10 +562,10 @@ const SMSRental = ({ navigate }) => {
               <View style={styles.smsSection}>
                 <View style={styles.smsSectionHeader}>
                   <Text style={styles.smsSectionTitle}>
-                    <FontAwesomeIcon icon={faEnvelope} size={14} color="#1e293b" /> Received Messages ({smsCodes.length})
+                    <FontAwesomeIcon icon={faEnvelope} size={14} color="#f5f3ff" /> Received Messages ({smsCodes.length})
                   </Text>
                   {polling && (
-                    <ActivityIndicator size="small" color="#800080" />
+                    <ActivityIndicator size="small" color="#da6bff" />
                   )}
                 </View>
                 
@@ -587,7 +587,7 @@ const SMSRental = ({ navigate }) => {
                         <TouchableOpacity 
                           style={styles.smsCopyBtn}
                           onPress={() => copyToClipboard(sms.text)}>
-                          <FontAwesomeIcon icon={faCopy} size={14} color="#800080" />
+                          <FontAwesomeIcon icon={faCopy} size={14} color="#da6bff" />
                         </TouchableOpacity>
                       </View>
                     </View>
@@ -641,14 +641,14 @@ const SMSRental = ({ navigate }) => {
         {!activeRental && (
           <View style={styles.orderCard}>
             <LinearGradient
-              colors={['#fafbff', '#ffffff']}
+              colors={['#0d0818', '#140c24']}
               style={styles.cardHeader}>
               <View style={styles.cardHeaderContent}>
                 <View style={styles.cardHeaderIcon}>
                   <LinearGradient
-                    colors={['#f3e8ff', '#faf5ff']}
+                    colors={['#1c1232', '#140c24']}
                     style={styles.cardHeaderIconGradient}>
-                    <FontAwesomeIcon icon={faCalendarAlt} size={18} color="#800080" />
+                    <FontAwesomeIcon icon={faCalendarAlt} size={18} color="#da6bff" />
                   </LinearGradient>
                 </View>
                 <View style={styles.cardHeaderTitles}>
@@ -666,12 +666,12 @@ const SMSRental = ({ navigate }) => {
                   style={styles.selectButton}
                   onPress={() => setShowServiceModal(true)}>
                   <View style={styles.selectContent}>
-                    <FontAwesomeIcon icon={faMobileAlt} size={18} color="#800080" style={{ marginRight: 12 }} />
-                    <Text style={[styles.selectButtonText, !selectedService && { color: '#94a3b8' }]}>
+                    <FontAwesomeIcon icon={faMobileAlt} size={18} color="#da6bff" style={{ marginRight: 12 }} />
+                    <Text style={[styles.selectButtonText, !selectedService && { color: '#8a76a8' }]}>
                       {selectedService ? selectedService.name : 'Select a service...'}
                     </Text>
                     <View style={styles.selectIconWrapper}>
-                      <FontAwesomeIcon icon={faChevronDown} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faChevronDown} size={12} color="#da6bff" />
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -684,12 +684,12 @@ const SMSRental = ({ navigate }) => {
                   style={styles.selectButton}
                   onPress={() => setShowCountryModal(true)}>
                   <View style={styles.selectContent}>
-                    <FontAwesomeIcon icon={faGlobe} size={18} color="#800080" style={{ marginRight: 12 }} />
-                    <Text style={[styles.selectButtonText, !selectedCountry && { color: '#94a3b8' }]}>
+                    <FontAwesomeIcon icon={faGlobe} size={18} color="#da6bff" style={{ marginRight: 12 }} />
+                    <Text style={[styles.selectButtonText, !selectedCountry && { color: '#8a76a8' }]}>
                       {selectedCountry ? `${selectedCountry.name} (${selectedCountry.phone_code})` : 'Select a country...'}
                     </Text>
                     <View style={styles.selectIconWrapper}>
-                      <FontAwesomeIcon icon={faChevronDown} size={12} color="#800080" />
+                      <FontAwesomeIcon icon={faChevronDown} size={12} color="#da6bff" />
                     </View>
                   </View>
                 </TouchableOpacity>
@@ -738,10 +738,10 @@ const SMSRental = ({ navigate }) => {
               {(loadingPrice || price) && (
                 <View style={styles.priceCard}>
                   <LinearGradient
-                    colors={['#f3e8ff', '#faf5ff']}
+                    colors={['#1c1232', '#140c24']}
                     style={styles.priceGradient}>
                     {loadingPrice ? (
-                      <ActivityIndicator size="small" color="#800080" />
+                      <ActivityIndicator size="small" color="#da6bff" />
                     ) : price ? (
                       <>
                         <View style={styles.priceRow}>
@@ -810,7 +810,7 @@ const SMSRental = ({ navigate }) => {
                 }}>
                 <View style={styles.listItemLeft}>
                   <View style={styles.listItemIcon}>
-                    <FontAwesomeIcon icon={faCalendarAlt} size={16} color="#800080" />
+                    <FontAwesomeIcon icon={faCalendarAlt} size={16} color="#da6bff" />
                   </View>
                   <View style={styles.listItemInfo}>
                     <Text style={styles.listItemService}>{rental.service_name}</Text>
@@ -867,16 +867,16 @@ const SMSRental = ({ navigate }) => {
               <TouchableOpacity 
                 onPress={() => setShowServiceModal(false)}
                 style={styles.modalCloseBtn}>
-                <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
               </TouchableOpacity>
             </View>
             
             <View style={styles.searchContainer}>
-              <FontAwesomeIcon icon={faSearch} size={16} color="#94a3b8" />
+              <FontAwesomeIcon icon={faSearch} size={16} color="#8a76a8" />
               <TextInput
                 style={styles.searchInput}
                 placeholder="Search services..."
-                placeholderTextColor="#94a3b8"
+                placeholderTextColor="#6b5b85"
                 value={serviceSearch}
                 onChangeText={setServiceSearch}
               />
@@ -930,16 +930,16 @@ const SMSRental = ({ navigate }) => {
               <TouchableOpacity 
                 onPress={() => setShowCountryModal(false)}
                 style={styles.modalCloseBtn}>
-                <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
               </TouchableOpacity>
             </View>
             
             <View style={styles.searchContainer}>
-              <FontAwesomeIcon icon={faSearch} size={16} color="#94a3b8" />
+              <FontAwesomeIcon icon={faSearch} size={16} color="#8a76a8" />
               <TextInput
                 style={styles.searchInput}
                 placeholder="Search countries..."
-                placeholderTextColor="#94a3b8"
+                placeholderTextColor="#6b5b85"
                 value={countrySearch}
                 onChangeText={setCountrySearch}
               />
@@ -995,7 +995,7 @@ const SMSRental = ({ navigate }) => {
               <TouchableOpacity 
                 onPress={() => setShowExtendModal(false)}
                 style={styles.modalCloseBtn}>
-                <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
               </TouchableOpacity>
             </View>
             
@@ -1018,7 +1018,7 @@ const SMSRental = ({ navigate }) => {
                 <TouchableOpacity 
                   style={styles.durationBtn}
                   onPress={() => setExtendHours(Math.min(168, extendHours + 4))}>
-                  <FontAwesomeIcon icon={faPlus} size={16} color="#800080" />
+                  <FontAwesomeIcon icon={faPlus} size={16} color="#da6bff" />
                 </TouchableOpacity>
               </View>
               
@@ -1054,7 +1054,7 @@ const SMSRental = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -1169,7 +1169,7 @@ const styles = StyleSheet.create({
     marginTop: -10,
   },
   activeCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 15,
     marginTop: 25,
     marginBottom: 20,
@@ -1198,7 +1198,7 @@ const styles = StyleSheet.create({
   timeRemainingBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
@@ -1217,7 +1217,7 @@ const styles = StyleSheet.create({
   },
   numberLabel: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     marginBottom: 6,
     textTransform: 'uppercase',
@@ -1226,21 +1226,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 12,
     padding: 14,
   },
   numberText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontFamily: 'monospace',
   },
   copyBtn: {
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1256,27 +1256,27 @@ const styles = StyleSheet.create({
   smsSectionTitle: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   noMessages: {
     alignItems: 'center',
     padding: 30,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 14,
   },
   noMessagesText: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     marginTop: 12,
   },
   noMessagesSubtext: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginTop: 4,
   },
   smsItem: {
-    backgroundColor: '#f0fdf4',
+    backgroundColor: '#0f1e16',
     borderRadius: 12,
     padding: 14,
     marginBottom: 10,
@@ -1290,12 +1290,12 @@ const styles = StyleSheet.create({
   },
   smsFrom: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   smsDate: {
     fontSize: 10,
-    color: '#94a3b8',
+    color: '#8a76a8',
   },
   smsBody: {
     flexDirection: 'row',
@@ -1320,7 +1320,7 @@ const styles = StyleSheet.create({
   activeDetails: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 12,
     padding: 14,
     marginBottom: 20,
@@ -1331,7 +1331,7 @@ const styles = StyleSheet.create({
   },
   detailLabel: {
     fontSize: 10,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     marginBottom: 4,
     textTransform: 'uppercase',
@@ -1339,7 +1339,7 @@ const styles = StyleSheet.create({
   detailValue: {
     fontSize: 13,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   actionButtons: {
     flexDirection: 'row',
@@ -1369,7 +1369,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ef4444',
   },
   orderCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 15,
     marginTop: 25,
     marginBottom: 20,
@@ -1381,12 +1381,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 8,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   cardHeader: {
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   cardHeaderContent: {
     flexDirection: 'row',
@@ -1411,11 +1411,11 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   cardSubtitle: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     marginTop: 2,
   },
   formContainer: {
@@ -1427,14 +1427,14 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 11,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 10,
     letterSpacing: 0.8,
   },
   selectButton: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
   },
   selectContent: {
@@ -1444,7 +1444,7 @@ const styles = StyleSheet.create({
   },
   selectButtonText: {
     fontSize: 14,
-    color: '#334155',
+    color: '#e9ddff',
     fontWeight: '600',
     flex: 1,
   },
@@ -1452,7 +1452,7 @@ const styles = StyleSheet.create({
     width: 28,
     height: 28,
     borderRadius: 8,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -1460,21 +1460,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 14,
     padding: 16,
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   durationBtn: {
     width: 44,
     height: 44,
     borderRadius: 12,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   durationDisplay: {
     alignItems: 'center',
@@ -1483,11 +1483,11 @@ const styles = StyleSheet.create({
   durationValue: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
   },
   durationUnit: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     marginTop: 2,
   },
   quickDurations: {
@@ -1499,21 +1499,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   quickDurationBtnActive: {
-    backgroundColor: '#f3e8ff',
-    borderColor: '#800080',
+    backgroundColor: '#140c24',
+    borderColor: 'rgba(198,61,255,0.45)',
   },
   quickDurationText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#64748b',
+    color: '#a78bca',
   },
   quickDurationTextActive: {
-    color: '#800080',
+    color: '#da6bff',
   },
   priceCard: {
     marginBottom: 20,
@@ -1530,27 +1530,27 @@ const styles = StyleSheet.create({
   },
   priceLabel: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   priceRate: {
     fontSize: 16,
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: 'bold',
   },
   priceDivider: {
     height: 1,
-    backgroundColor: '#e9d5ff',
+    backgroundColor: '#241640',
     marginVertical: 12,
   },
   totalLabel: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   priceValue: {
     fontSize: 24,
-    color: '#800080',
+    color: '#da6bff',
     fontWeight: 'bold',
   },
   submitButton: {
@@ -1579,7 +1579,7 @@ const styles = StyleSheet.create({
     marginLeft: 12,
   },
   listCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 15,
     marginBottom: 20,
     borderRadius: 22,
@@ -1590,7 +1590,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 4,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   listHeader: {
     flexDirection: 'row',
@@ -1601,10 +1601,10 @@ const styles = StyleSheet.create({
   listTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   viewAllBtn: {
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 10,
@@ -1612,13 +1612,13 @@ const styles = StyleSheet.create({
   viewAllText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#800080',
+    color: '#da6bff',
   },
   listItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 14,
     padding: 14,
     marginBottom: 10,
@@ -1632,7 +1632,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 12,
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -1643,11 +1643,11 @@ const styles = StyleSheet.create({
   listItemService: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   listItemNumber: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     marginTop: 2,
     fontFamily: 'monospace',
   },
@@ -1710,7 +1710,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     maxHeight: screenHeight * 0.75,
@@ -1722,25 +1722,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   modalCloseBtn: {
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderRadius: 12,
     paddingHorizontal: 14,
     marginHorizontal: 20,
@@ -1751,7 +1751,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   modalList: {
     padding: 16,
@@ -1762,27 +1762,27 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 16,
     borderRadius: 14,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     marginBottom: 10,
     borderWidth: 2,
     borderColor: 'transparent',
   },
   modalItemSelected: {
-    backgroundColor: '#f3e8ff',
-    borderColor: '#800080',
+    backgroundColor: '#140c24',
+    borderColor: 'rgba(198,61,255,0.45)',
   },
   modalItemText: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#334155',
+    color: '#e9ddff',
     flex: 1,
   },
   modalItemTextSelected: {
-    color: '#800080',
+    color: '#da6bff',
   },
   modalItemCode: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginRight: 10,
     textTransform: 'uppercase',
   },
@@ -1799,12 +1799,12 @@ const styles = StyleSheet.create({
   },
   countryPhoneCode: {
     fontSize: 11,
-    color: '#64748b',
+    color: '#a78bca',
     marginTop: 2,
   },
   // Extend Modal
   extendModalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 24,
     marginHorizontal: 20,
     marginBottom: 40,
@@ -1816,12 +1816,12 @@ const styles = StyleSheet.create({
   extendLabel: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 16,
     textAlign: 'center',
   },
   extendCostDisplay: {
-    backgroundColor: '#f3e8ff',
+    backgroundColor: '#140c24',
     borderRadius: 14,
     padding: 16,
     alignItems: 'center',
@@ -1829,13 +1829,13 @@ const styles = StyleSheet.create({
   },
   extendCostLabel: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 4,
   },
   extendCostValue: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
   },
   extendSubmitBtn: {
     borderRadius: 14,

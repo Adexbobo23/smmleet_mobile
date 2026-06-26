@@ -227,8 +227,8 @@ const SMSHistory = ({ navigate, route }) => {
         onPress={() => navigate('SMSActivation', { activationId: item.activation_id })}
         activeOpacity={0.7}>
         <View style={styles.historyItemLeft}>
-          <View style={[styles.historyItemIcon, { backgroundColor: '#f3e8ff' }]}>
-            <FontAwesomeIcon icon={faMobileAlt} size={18} color="#800080" />
+          <View style={[styles.historyItemIcon, { backgroundColor: '#140c24' }]}>
+            <FontAwesomeIcon icon={faMobileAlt} size={18} color="#da6bff" />
           </View>
           <View style={styles.historyItemInfo}>
             <Text style={styles.historyItemService}>{item.service_name}</Text>
@@ -388,8 +388,8 @@ const SMSHistory = ({ navigate, route }) => {
         {activeTab === 'activations' ? (
           <>
             <View style={styles.statCard}>
-              <View style={[styles.statIcon, { backgroundColor: '#f3e8ff' }]}>
-                <FontAwesomeIcon icon={faPhone} size={16} color="#800080" />
+              <View style={[styles.statIcon, { backgroundColor: '#140c24' }]}>
+                <FontAwesomeIcon icon={faPhone} size={16} color="#da6bff" />
               </View>
               <Text style={styles.statValue}>{activationStats.total || 0}</Text>
               <Text style={styles.statLabel}>Total</Text>
@@ -414,8 +414,8 @@ const SMSHistory = ({ navigate, route }) => {
         ) : (
           <>
             <View style={styles.statCard}>
-              <View style={[styles.statIcon, { backgroundColor: '#f3e8ff' }]}>
-                <FontAwesomeIcon icon={faCalendarAlt} size={16} color="#800080" />
+              <View style={[styles.statIcon, { backgroundColor: '#140c24' }]}>
+                <FontAwesomeIcon icon={faCalendarAlt} size={16} color="#da6bff" />
               </View>
               <Text style={styles.statValue}>{rentalStats.total || 0}</Text>
               <Text style={styles.statLabel}>Total</Text>
@@ -443,11 +443,11 @@ const SMSHistory = ({ navigate, route }) => {
       {/* Search and Filters */}
       <View style={styles.searchFilterContainer}>
         <View style={styles.searchContainer}>
-          <FontAwesomeIcon icon={faSearch} size={16} color="#94a3b8" />
+          <FontAwesomeIcon icon={faSearch} size={16} color="#8a76a8" />
           <TextInput
             style={styles.searchInput}
             placeholder="Search by number..."
-            placeholderTextColor="#94a3b8"
+            placeholderTextColor="#6b5b85"
             value={activeTab === 'activations' ? activationSearch : rentalSearch}
             onChangeText={activeTab === 'activations' ? setActivationSearch : setRentalSearch}
             onSubmitEditing={handleSearch}
@@ -500,7 +500,7 @@ const SMSHistory = ({ navigate, route }) => {
         ListFooterComponent={() => (
           loadingMore ? (
             <View style={styles.loadingMore}>
-              <ActivityIndicator size="small" color="#800080" />
+              <ActivityIndicator size="small" color="#da6bff" />
             </View>
           ) : null
         )}
@@ -540,7 +540,7 @@ const SMSHistory = ({ navigate, route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -631,7 +631,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   tabActive: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
   },
   tabText: {
     color: 'rgba(255,255,255,0.7)',
@@ -640,7 +640,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   tabTextActive: {
-    color: '#800080',
+    color: '#da6bff',
   },
   statsContainer: {
     flexDirection: 'row',
@@ -651,7 +651,7 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 16,
     padding: 14,
     alignItems: 'center',
@@ -672,12 +672,12 @@ const styles = StyleSheet.create({
   statValue: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 2,
   },
   statLabel: {
     fontSize: 10,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     textTransform: 'uppercase',
   },
@@ -688,19 +688,19 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 12,
     paddingHorizontal: 14,
     height: 46,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   searchInput: {
     flex: 1,
     marginLeft: 10,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
   },
   filterScroll: {
     maxHeight: 40,
@@ -713,21 +713,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
   },
   filterChipActive: {
-    backgroundColor: '#f3e8ff',
-    borderColor: '#800080',
+    backgroundColor: '#140c24',
+    borderColor: 'rgba(198,61,255,0.45)',
   },
   filterChipText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#64748b',
+    color: '#a78bca',
   },
   filterChipTextActive: {
-    color: '#800080',
+    color: '#da6bff',
   },
   listContainer: {
     padding: 15,
@@ -736,7 +736,7 @@ const styles = StyleSheet.create({
   historyItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 16,
     padding: 16,
     marginBottom: 12,
@@ -746,7 +746,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 4,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
   },
   historyItemLeft: {
     flexDirection: 'row',
@@ -767,18 +767,18 @@ const styles = StyleSheet.create({
   historyItemService: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 4,
   },
   historyItemNumber: {
     fontSize: 12,
-    color: '#64748b',
+    color: '#a78bca',
     fontFamily: 'monospace',
     marginBottom: 4,
   },
   historyItemDate: {
     fontSize: 10,
-    color: '#94a3b8',
+    color: '#8a76a8',
   },
   historyItemRight: {
     alignItems: 'flex-end',
@@ -787,7 +787,7 @@ const styles = StyleSheet.create({
   historyItemCost: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#800080',
+    color: '#da6bff',
     marginBottom: 6,
   },
   statusBadge: {
@@ -805,7 +805,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   codePreview: {
-    backgroundColor: '#f0fdf4',
+    backgroundColor: '#0f1e16',
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 6,
@@ -818,7 +818,7 @@ const styles = StyleSheet.create({
   },
   rentalDuration: {
     fontSize: 10,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
   },
   loadingMore: {
@@ -831,13 +831,13 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#64748b',
+    color: '#a78bca',
     fontWeight: '600',
     marginTop: 16,
   },
   emptySubtext: {
     fontSize: 13,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginTop: 8,
     marginBottom: 24,
   },

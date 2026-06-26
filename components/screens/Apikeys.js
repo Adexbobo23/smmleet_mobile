@@ -193,9 +193,9 @@ const ApiKeys = ({ navigate }) => {
             onPress={() => setShowCreateModal(true)}
             activeOpacity={0.8}>
             <LinearGradient
-              colors={['#ffffff', '#f8fafc']}
+              colors={['#140c24', '#0d0818']}
               style={styles.addBtnGradient}>
-              <FontAwesomeIcon icon={faPlus} size={18} color="#800080" />
+              <FontAwesomeIcon icon={faPlus} size={18} color="#da6bff" />
             </LinearGradient>
           </TouchableOpacity>
         </View>
@@ -226,9 +226,9 @@ const ApiKeys = ({ navigate }) => {
           <View style={styles.emptyState}>
             <View style={styles.emptyIconContainer}>
               <LinearGradient
-                colors={['#f3e8ff', '#faf5ff']}
+                colors={['#1c1232', '#140c24']}
                 style={styles.emptyIconGradient}>
-                <FontAwesomeIcon icon={faKey} size={48} color="#800080" />
+                <FontAwesomeIcon icon={faKey} size={48} color="#da6bff" />
               </LinearGradient>
             </View>
             <Text style={styles.emptyTitle}>No API Keys Yet</Text>
@@ -253,9 +253,9 @@ const ApiKeys = ({ navigate }) => {
               <View style={styles.keyHeader}>
                 <View style={styles.keyIconContainer}>
                   <LinearGradient
-                    colors={['#f3e8ff', '#faf5ff']}
+                    colors={['#1c1232', '#140c24']}
                     style={styles.keyIconGradient}>
-                    <FontAwesomeIcon icon={faKey} size={20} color="#800080" />
+                    <FontAwesomeIcon icon={faKey} size={20} color="#da6bff" />
                   </LinearGradient>
                 </View>
                 <View style={styles.keyHeaderInfo}>
@@ -291,14 +291,14 @@ const ApiKeys = ({ navigate }) => {
                         <FontAwesomeIcon 
                           icon={visibleKeys[apiKey.id] ? faEyeSlash : faEye} 
                           size={16} 
-                          color="#64748b" 
+                          color="#a78bca" 
                         />
                       </TouchableOpacity>
                       <TouchableOpacity 
                         style={styles.keyActionBtn}
                         onPress={() => copyToClipboard(apiKey.key, apiKey.name)}
                         activeOpacity={0.7}>
-                        <FontAwesomeIcon icon={faCopy} size={16} color="#64748b" />
+                        <FontAwesomeIcon icon={faCopy} size={16} color="#a78bca" />
                       </TouchableOpacity>
                     </View>
                   </View>
@@ -306,14 +306,14 @@ const ApiKeys = ({ navigate }) => {
 
                 <View style={styles.keyMeta}>
                   <View style={styles.keyMetaItem}>
-                    <FontAwesomeIcon icon={faClock} size={12} color="#94a3b8" />
+                    <FontAwesomeIcon icon={faClock} size={12} color="#8a76a8" />
                     <Text style={styles.keyMetaText}>
                       Created: {formatDate(apiKey.created_at)}
                     </Text>
                   </View>
                   {apiKey.last_used_at && (
                     <View style={styles.keyMetaItem}>
-                      <FontAwesomeIcon icon={faClock} size={12} color="#94a3b8" />
+                      <FontAwesomeIcon icon={faClock} size={12} color="#8a76a8" />
                       <Text style={styles.keyMetaText}>
                         Last used: {formatDate(apiKey.last_used_at)}
                       </Text>
@@ -349,9 +349,9 @@ const ApiKeys = ({ navigate }) => {
             <View style={styles.modalHeader}>
               <View style={styles.modalHeaderIcon}>
                 <LinearGradient
-                  colors={['#f3e8ff', '#faf5ff']}
+                  colors={['#1c1232', '#140c24']}
                   style={styles.modalHeaderIconGradient}>
-                  <FontAwesomeIcon icon={faKey} size={24} color="#800080" />
+                  <FontAwesomeIcon icon={faKey} size={24} color="#da6bff" />
                 </LinearGradient>
               </View>
               <Text style={styles.modalTitle}>Create New API Key</Text>
@@ -361,7 +361,7 @@ const ApiKeys = ({ navigate }) => {
               <TouchableOpacity 
                 style={styles.modalCloseBtn}
                 onPress={() => setShowCreateModal(false)}>
-                <FontAwesomeIcon icon={faTimes} size={20} color="#64748b" />
+                <FontAwesomeIcon icon={faTimes} size={20} color="#a78bca" />
               </TouchableOpacity>
             </View>
 
@@ -370,7 +370,7 @@ const ApiKeys = ({ navigate }) => {
               <TextInput
                 style={styles.input}
                 placeholder="e.g., Production API Key"
-                placeholderTextColor="#cbd5e1"
+                placeholderTextColor="#6b5b85"
                 value={newKeyName}
                 onChangeText={setNewKeyName}
                 autoFocus
@@ -416,7 +416,7 @@ const ApiKeys = ({ navigate }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
   },
   centerContent: {
     justifyContent: 'center',
@@ -495,7 +495,7 @@ const styles = StyleSheet.create({
   },
   infoCard: {
     flexDirection: 'row',
-    backgroundColor: '#eff6ff',
+    backgroundColor: '#140c24',
     marginHorizontal: 20,
     marginTop: 20,
     marginBottom: 20,
@@ -549,12 +549,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 12,
   },
   emptyText: {
     fontSize: 14,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
     marginBottom: 32,
     lineHeight: 22,
@@ -581,12 +581,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   keyCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     marginHorizontal: 20,
     marginBottom: 16,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#f1f5f9',
+    borderColor: 'rgba(255,255,255,0.06)',
     overflow: 'hidden',
     elevation: 3,
     shadowColor: '#000',
@@ -599,7 +599,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 18,
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   keyIconContainer: {
     width: 48,
@@ -620,14 +620,14 @@ const styles = StyleSheet.create({
   keyName: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 6,
   },
   statusBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'flex-start',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 8,
@@ -647,23 +647,23 @@ const styles = StyleSheet.create({
   keyLabel: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 10,
     letterSpacing: 0.8,
   },
   keyValueRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 12,
     padding: 14,
   },
   keyValue: {
     flex: 1,
     fontSize: 13,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '600',
     fontFamily: 'monospace',
   },
@@ -675,7 +675,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
@@ -689,14 +689,14 @@ const styles = StyleSheet.create({
   },
   keyMetaText: {
     fontSize: 11,
-    color: '#94a3b8',
+    color: '#8a76a8',
     marginLeft: 8,
     fontWeight: '500',
   },
   keyFooter: {
     padding: 18,
     borderTopWidth: 1,
-    borderTopColor: '#f1f5f9',
+    borderTopColor: 'rgba(255,255,255,0.06)',
   },
   deleteBtn: {
     flexDirection: 'row',
@@ -726,7 +726,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   modalContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#0d0818',
     borderRadius: 24,
     width: '100%',
     maxWidth: 400,
@@ -736,7 +736,7 @@ const styles = StyleSheet.create({
     padding: 24,
     alignItems: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: '#f1f5f9',
+    borderBottomColor: 'rgba(255,255,255,0.06)',
   },
   modalHeaderIcon: {
     width: 72,
@@ -754,12 +754,12 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1e293b',
+    color: '#f5f3ff',
     marginBottom: 8,
   },
   modalSubtitle: {
     fontSize: 13,
-    color: '#64748b',
+    color: '#a78bca',
     textAlign: 'center',
   },
   modalCloseBtn: {
@@ -769,7 +769,7 @@ const styles = StyleSheet.create({
     width: 36,
     height: 36,
     borderRadius: 10,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -779,18 +779,18 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 10,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
     marginBottom: 10,
     letterSpacing: 0.8,
   },
   input: {
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     padding: 16,
     fontSize: 14,
-    color: '#1e293b',
+    color: '#f5f3ff',
     fontWeight: '500',
     marginBottom: 24,
   },
@@ -800,9 +800,9 @@ const styles = StyleSheet.create({
   },
   cancelBtn: {
     flex: 1,
-    backgroundColor: '#f8fafc',
+    backgroundColor: '#07040d',
     borderWidth: 1.5,
-    borderColor: '#e2e8f0',
+    borderColor: 'rgba(255,255,255,0.08)',
     borderRadius: 14,
     paddingVertical: 16,
     alignItems: 'center',
@@ -810,7 +810,7 @@ const styles = StyleSheet.create({
   cancelBtnText: {
     fontSize: 15,
     fontWeight: 'bold',
-    color: '#64748b',
+    color: '#a78bca',
   },
   createBtn: {
     flex: 1,
